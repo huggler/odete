@@ -1,0 +1,157 @@
+<!doctype html>
+<html class="no-js" ng-app="angularApp">
+  <head>
+    <meta charset="utf-8">
+    <title>odete.com</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <link rel="stylesheet" id="css-default" href="">
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css"/>
+  </head>
+  <body ng-controller="MainCtrl">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Sobre</h4>
+          </div>
+          <div class="modal-body">
+            Um texto explicado sobre o app.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="navbar-brand">
+            <a href="/">odete.com</a>
+          </div>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-brand-centered">
+          <ul class="nav navbar-nav">
+            <li><a href="#" data-toggle="modal" data-target="#myModal">Sobre</a></li>
+            <li ui-sref-active="active"><a href="#/contato" ui-sref="contato">Contato</a></li>
+            <li ui-sref-active="active"><a href="#/about" ui-sref="about">Como funciona?</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li ui-sref-active="active"><a href="#/login" ui-sref="login">Login</a></li>
+            <li ui-sref-active="active"><a href="#/pesquisar" ui-sref="pesquisar">Pesquisar</a></li>
+            <li ui-sref-active="active"><a href="#/cadastro" ui-sref="cadastro">Cadastro</a></li>
+          </ul>
+
+
+        <select id="css">
+            <option></option>
+            <option value="http://bootswatch.com/cyborg/bootstrap.min.css">cyborg</option>
+            <option value="http://bootswatch.com/yeti/bootstrap.min.css">yeti</option>
+            <option value="http://bootswatch.com/superhero/bootstrap.min.css">superhero</option>
+            <option value="http://bootswatch.com/sandstone/bootstrap.min.css">sandstone</option>
+            <option value="http://bootswatch.com/paper/bootstrap.min.css">paper</option>
+            <option value="http://bootswatch.com/journal/bootstrap.min.css">journal</option>
+            <option value="http://bootswatch.com/flatly/bootstrap.min.css">flatly</option>
+            <option value="http://bootswatch.com/darkly/bootstrap.min.css">darkly</option>
+            <option value="http://bootswatch.com/cerulean/bootstrap.min.css">cerulean</option>
+        </select>
+
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- Add your site or application content here -->
+    <div ui-view></div>
+
+    <div class="footer">
+    </div>
+    
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/contato.js"></script>
+        <script src="scripts/controllers/servicos.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/cadastro.js"></script>
+        <script src="scripts/controllers/pesquisar.js"></script>
+        <script src="scripts/controllers/bagunceiro.js"></script>
+        <script src="scripts/services/user.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

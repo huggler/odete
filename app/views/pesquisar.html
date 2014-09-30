@@ -1,0 +1,127 @@
+<div class="jumbotron jumbotron-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+                <h1 class="h1">
+                    Pesquisar
+                </h1>
+                <p>Nós tornamos o serviço de limpeza conveniente: você pode agendar, cancelar, e refazer serviços de limpeza diretamente no site através de seu computador e smartphone.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- container -->
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="filter-panel" class="filter-panel">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <label class="filter-col" for="pref-perpage">Rows per page:</label>
+                                <select id="pref-perpage" class="form-control">
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option selected="selected" value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="300">300</option>
+                                    <option value="400">400</option>
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                </select>                                
+                            </div>
+                            <div class="form-group">
+                                <label class="filter-col" for="pref-search">Search:</label>
+                                <input type="search" class="form-control input-sm" id="input-search" placeholder="Pesquisar..." data-ng-model="elementName"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="filter-col" for="pref-orderby">Order by:</label>
+                                <select id="pref-orderby" class="form-control">
+                                    <option>Descendent</option>
+                                </select>                                
+                            </div>
+                            <div class="form-group">    
+                                <div class="checkbox">
+                                    <label><input type="checkbox"> Remember parameters</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm filter-col">
+                                    <span class="glyphicon glyphicon-record"></span> Filtrar
+                                </button>  
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- resultado -->
+        <div class="row searchable-container">
+        
+            <!-- item -->
+            <div class="col-xs-12 col-sm-4 col-md-4 items" data-ng-repeat="item in data | filter:elementName">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 col-xs-4">
+                            <img src="https://placeimg.com/200/200/people/{{item}}" alt="" class="img-circle img-responsive" />
+                        </div>
+                        <div class="col-sm-6 col-md-8 col-xs-8">
+                            <div class="rating hidden-sm">
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <h5>{{item.nome}}</h5>
+                            <small>
+                                <cite title="San Francisco, USA"><i class="glyphicon glyphicon-map-marker"></i> Rio de Janeiro</cite>
+                            </small>
+                            <p>
+                                <i class="glyphicon glyphicon-envelope"></i>email@example.com
+                                <br />
+                                <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
+                                <!-- Split button -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary">Social</button>
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span><span class="sr-only">Social</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Twitter</a></li>
+                                        <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+                                        <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Github</a></li>
+                                    </ul>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- fim item -->
+
+        </div>
+    <!-- fim resultado -->
+
+</div>
+<!-- fim container -->
