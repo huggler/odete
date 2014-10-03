@@ -249,27 +249,37 @@
                               <!-- Form Name -->
                               <legend>Detalhes do endereço</legend>
 
-                              <div id="map"></div>
+                          <div class="col-sm-12">
+                            <div class="form-group">
+                              <div id="map" style="overflow: hidden; max-height: 300px"></div>
+                          </div>
+                          </div>
 
                             <!-- CEP e ENDERECO -->
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <div class="input-group input-group-lg">
-                                        <input type="number" placeholder="Cep" name="txtCep" ng-model="txtCep" id="cep" class="form-control">
+                                        <input type="text" placeholder="Cep" name="txtCep" ng-model="cep.zip" class="form-control">
                                         <span class="input-group-btn">
                                              <button class="btn btn-default" type="button">
-                                                <span class="glyphicon glyphicon-search" ng-click="getCep()"></span>
+                                                <span class="glyphicon glyphicon-search" ng-click="getCep()" title="Pesquisar Cep"></span>
                                             </button>
                                             <button class="btn btn-default" type="button">
-                                                <span class="glyphicon glyphicon-map-marker" ng-click="getMarker()"></span>
+                                                <span class="glyphicon glyphicon-map-marker" ng-click="getMarker()" title="Usar posição atual"></span>
                                             </button>
                                         </span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-9">
+                            <div class="col-sm-7">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Endereço" ng-model="logradouro" id="logradouro" class="form-control input-lg">
+                                    <input type="text" placeholder="Endereço" ng-model="cep.endereco" class="form-control input-lg">
+                                </div>
+                            </div>
+                            <!-- Complemento -->
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Numero" ng-model="cep.numero" class="form-control input-lg">
                                 </div>
                             </div>
                             <!-- FIM CEP e ENDERECO -->
@@ -277,29 +287,22 @@
                             <!-- UF, CIDADE, BAIRRO -->
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <select class="form-control input-lg">
-                                        <option>Estado</option>
+                                    <select class="form-control input-lg" ng-model="cep.estado">
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Cidade" ng-model="localidade" id="localidade" class="form-control input-lg">
+                                    <input type="text" placeholder="Cidade" ng-model="cep.cidade" class="form-control input-lg">
                                 </div>
                             </div>
                             <div class="col-sm-5">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Bairro" ng-model="bairro" class="form-control input-lg">
+                                    <input type="text" placeholder="Bairro" ng-model="cep.bairro" class="form-control input-lg">
                                 </div>
                             </div>
                             <!-- UF, CIDADE, BAIRRO -->
 
-                            <!-- Complemento -->
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <input type="text" placeholder="Complemento" ng-model="txtComplemento" class="form-control input-lg">
-                                </div>
-                            </div>
 
                             <!-- minhas config -->
                             <legend>Configurações do local</legend>
@@ -321,7 +324,7 @@
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-credit-card"></span>
                                             </span>
-                                            <input type="number" class="form-control input-sm" placeholder="Posso pagar até">
+                                            <input type="number" class="form-control input-sm" placeholder="Pago até">
                                             <span class="input-group-addon input-sm">R$</span>
                                         </div>
                                     </div>

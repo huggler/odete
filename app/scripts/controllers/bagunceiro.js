@@ -10,16 +10,14 @@
 var geocoder;
 
 angular.module('angularApp')
-  .controller('BagunceiroCtrl', function ($scope, $http,Restangular) {
+  .controller('BagunceiroCtrl', function ($scope, $http, Restangular) {
 
-    $scope.projects = Restangular.all("projects").getList().$object;
+    $scope.projects = Restangular.all('projects').getList().$object;
 
-    $scope.save = function(){
-    	alert('oi seu porra loooka');
-    };
+    $scope.save = function(){};
 
     $scope.getCep = function(){
-      $http.get("http://cep.correiocontrol.com.br/"+ $scope.txtCep +".json").success(function(data){
+      $http.get('http://cep.correiocontrol.com.br/'+ $scope.txtCep +'.json').success(function(data){
           $scope.localidade = data.localidade;
           $scope.logradouro = data.logradouro;
           $scope.bairro = data.bairro;
@@ -32,71 +30,109 @@ angular.module('angularApp')
     $scope.getMarker = function(){
       if (navigator.geolocation) {
           geocoder = new google.maps.Geocoder();
-          navigator.geolocation.getCurrentPosition(showPosition, handleError);
+          navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.handleError);
       }
     };
 
 
     $scope.showPosition = function(position) {
-        showMap(position);
-        showAddress(position);
+        //$scope.showMap(position);
+        $scope.showAddress(position);
     };
  
     $scope.showMap = function(position){
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        var imgUrl = "http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=400x300&sensor=false";
-        $("#map").html("<img src='" + imgUrl + "'>");
+
+      var wd = $('#map').width();
+      var hg = 300;
+      var scale = (wd > 340 ? 1 : 2);
+
+      var latlon = position.coords.latitude + ',' + position.coords.longitude;
+      var imgUrl = 'http://maps.googleapis.com/maps/api/staticmap?center=' + latlon + '&zoom=14&size='+wd+'x'+hg+'&sensor=false&scale='+ scale;
+      $('#map').html('<img src=' + imgUrl + '>');
     };
  
     $scope.showAddress = function(position){
         var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        var city = "";
-        var state = "";
+
+        var objCep = {
+          numero : 'street_number',
+          cidade : 'locality',
+          endereco : 'route',
+          zip : 'postal_code',
+          estado : 'administrative_area_level_1',
+          bairro : 'neighborhood',
+          pais : 'country'
+        };
  
-        var postalCode = "";
         geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
+            
+            if (status === google.maps.GeocoderStatus.OK) {
+                
                 if (results[1]) {
-                    for (var i = 0; i < results[0].address_components.length; i++) {
-                        for (var b = 0; b < results[0].address_components[i].types.length; b++) {
-                            if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
-                                state = results[0].address_components[i];
+
+                  var addressList = results[0].address_components;
+                  var addressListLen = addressList.length;
+                  var address = '';
+                  var typeAdressList = '';
+                  var typeAdressListLen = '';
+                  var typeAdress = '';
+
+                    for (var i = 0; i < addressListLen; i++) {
+
+                      address = addressList[i];
+                      typeAdressList = address.types;
+                      typeAdressListLen = typeAdressList.length;
+
+                        for (var b = 0; b < typeAdressListLen; b++) {
+
+                          typeAdress = typeAdressList[b];
+
+                            if (typeAdress === objCep.numero) {
+                                objCep.numero = address.short_name;
                             }
-                            if (results[0].address_components[i].types[b] == "locality") {
-                                city = results[0].address_components[i];
+                            if (typeAdress === objCep.cidade) {
+                                objCep.cidade = address.short_name;
                             }
-                            if (results[0].address_components[i].types[b] == "postal_code") {
-                                postalCode = results[0].address_components[i];
+                            if (typeAdress === objCep.endereco) {
+                                objCep.endereco = address.short_name;
+                            }
+                            if (typeAdress === objCep.zip) {
+                                objCep.zip = address.short_name;
+                            }
+                            if (typeAdress === objCep.estado) {
+                                objCep.estado = address.short_name;
+                            }
+                            if (typeAdress === objCep.bairro) {
+                                objCep.bairro = address.short_name;
+                            }
+                            if (typeAdress === objCep.pais) {
+                                objCep.pais = address.short_name;
                             }
                          }
                      }
-                     var state = state.short_name;
-                     var city = city.short_name;
-                     var zip = postalCode.short_name;
-           
-                    $("#localidade").val(city);
-                    $("#cep").val(zip);
+
+                     console.log(objCep);
+                     $scope.cep = objCep;
+                     $scope.$apply();
                  }
             }
         });
     };
  
-    function handleError(error) {
-        switch(error.code)
-        {
+    $scope.handleError = function(error) {
+        switch(error.code){
             case error.PERMISSION_DENIED:
-                alert("Usuário negou o pedido de Geolocalização.");
+                $scope.errorMsg = ('Usuário negou o pedido de Geolocalização.');
             break;
             case error.POSITION_UNAVAILABLE:
-                alert("Informações sobre a localização está indisponível.");
+                $scope.errorMsg = ('Informações sobre a localização está indisponível.');
             break;
             case error.TIMEOUT:
-                alert("O pedido para obter a localização do usuário expirou.");
+                $scope.errorMsg = ('O pedido para obter a localização do usuário expirou.');
             break;
             case error.UNKNOWN_ERROR:
-                alert("Ocorreu um erro desconhecido.");
+                $scope.errorMsg = ('Ocorreu um erro desconhecido.');
             break;
-         };
+         }
     };
-
   });

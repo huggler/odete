@@ -35,125 +35,123 @@ angular
   })
   .config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
       .state('main', {
-        url: "/",
+        url: '/',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
       .state('about', {
-        url: "/about",
+        url: '/about',
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
       .state('contato', {
-        url: "/contato",
+        url: '/contato',
         templateUrl: 'views/contato.html',
         controller: 'ContatoCtrl'
       })
       .state('servicos', {
-        url: "/servicos",
+        url: '/servicos',
         templateUrl: 'views/servicos.html',
         controller: 'ServicosCtrl'
       })
       .state('login', {
-        url: "/login",
+        url: '/login',
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
       .state('cadastro', {
-        url: "/cadastro",
+        url: '/cadastro',
         templateUrl: 'views/cadastro.html',
         controller: 'CadastroCtrl'
       })
       .state('bagunceiro', {
-        parent: "cadastro",
-        url: "/bagunceiro",
+        parent: 'cadastro',
+        url: '/bagunceiro',
         templateUrl: 'views/bagunceiro.html',
         controller: 'BagunceiroCtrl'
       })
       .state('odete', {
-        parent: "cadastro",
-        url: "/odete",
+        parent: 'cadastro',
+        url: '/odete',
         templateUrl: 'views/xibata.html',
         controller: 'BagunceiroCtrl'
       })
       .state('pesquisar', {
-        url: "/pesquisar",
+        url: '/pesquisar',
         templateUrl: 'views/pesquisar.html',
         controller: 'PesquisarCtrl'
-      })
+      });
   }).run(function($rootScope,$state,$stateParams){
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
 });
 
 
-    (function ($) {
-        $(function () {
+$(document).ready(function(){
 
-            var addFormGroup = function (event) {
-                event.preventDefault();
+  /* usado para alternar o css */    
+  $('#css').change(function(){
+      $('#css-default').attr('href', this.value);
+  });
 
-                var $formGroup = $(this).closest('.form-group');
-                var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
-                var $formGroupClone = $formGroup.clone();
+  /* usado para adicionar novos campos de telefones */
+  var addFormGroup = function (event) {
+      event.preventDefault();
 
-                $(this)
-                    .toggleClass('btn-success btn-add btn-danger btn-remove')
-                    .html('–');
+      var $formGroup = $(this).closest('.form-group');
+      var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+      var $formGroupClone = $formGroup.clone();
 
-                $formGroupClone.find('input').val('');
-                $formGroupClone.find('.concept').text('Operadora');
-                $formGroupClone.insertAfter($formGroup);
+      $(this)
+          .toggleClass('btn-success btn-add btn-danger btn-remove')
+          .html('–');
 
-                var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
-                if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
-                    $lastFormGroupLast.find('.btn-add').attr('disabled', true);
-                }
-            };
+      $formGroupClone.find('input').val('');
+      $formGroupClone.find('.concept').text('Operadora');
+      $formGroupClone.insertAfter($formGroup);
 
-            var removeFormGroup = function (event) {
-                event.preventDefault();
+      var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+      if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
+          $lastFormGroupLast.find('.btn-add').attr('disabled', true);
+      }
+  };
 
-                var $formGroup = $(this).closest('.form-group');
-                var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+  var removeFormGroup = function (event) {
+      event.preventDefault();
 
-                var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
-                if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
-                    $lastFormGroupLast.find('.btn-add').attr('disabled', false);
-                }
+      var $formGroup = $(this).closest('.form-group');
+      var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
 
-                $formGroup.remove();
-            };
+      var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+      if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
+          $lastFormGroupLast.find('.btn-add').attr('disabled', false);
+      }
 
-            var selectFormGroup = function (event) {
-                event.preventDefault();
+      $formGroup.remove();
+  };
 
-                var $selectGroup = $(this).closest('.input-group-select');
-                var param = $(this).attr("href").replace("#","");
-                var concept = $(this).text();
+  var selectFormGroup = function (event) {
+      event.preventDefault();
 
-                $selectGroup.find('.concept').text(concept);
-                $selectGroup.find('.input-group-select-val').val(param);
+      var $selectGroup = $(this).closest('.input-group-select');
+      var param = $(this).attr('href').replace('#','');
+      var concept = $(this).text();
 
-            }
+      $selectGroup.find('.concept').text(concept);
+      $selectGroup.find('.input-group-select-val').val(param);
 
-            var countFormGroup = function ($form) {
-                return $form.find('.form-group').length;
-            };
+  };
 
-            $(document).on('click', '.btn-add', addFormGroup);
-            $(document).on('click', '.btn-remove', removeFormGroup);
-            $(document).on('click', '.dropdown-menu a', selectFormGroup);
+  var countFormGroup = function ($form) {
+      return $form.find('.form-group').length;
+  };
 
-        });
-    })(jQuery);
+  $(document).on('click', '.btn-add', addFormGroup);
+  $(document).on('click', '.btn-remove', removeFormGroup);
+  $(document).on('click', '.dropdown-menu a', selectFormGroup);
 
-    $(document).ready(function(){
-        $("#css").change(function(){
-            $("#css-default").attr("href", this.value);
-        });
-    });
+});

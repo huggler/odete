@@ -58,7 +58,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-brand-centered">
           <ul class="nav navbar-nav">
-            <li><a href="#" data-toggle="modal" data-target="#myModal">Sobre</a></li>
+            <li><a href="" data-toggle="modal" data-target="#myModal">Sobre</a></li>
             <li ui-sref-active="active"><a href="#/contato" ui-sref="contato">Contato</a></li>
             <li ui-sref-active="active"><a href="#/about" ui-sref="about">Como funciona?</a></li>
           </ul>
@@ -66,21 +66,24 @@
             <li ui-sref-active="active"><a href="#/login" ui-sref="login">Login</a></li>
             <li ui-sref-active="active"><a href="#/pesquisar" ui-sref="pesquisar">Pesquisar</a></li>
             <li ui-sref-active="active"><a href="#/cadastro" ui-sref="cadastro">Cadastro</a></li>
+            <li>
+                <select id="css">
+                    <option></option>
+                    <option value="http://bootswatch.com/cyborg/bootstrap.min.css">cyborg</option>
+                    <option value="http://bootswatch.com/yeti/bootstrap.min.css">yeti</option>
+                    <option value="http://bootswatch.com/superhero/bootstrap.min.css">superhero</option>
+                    <option value="http://bootswatch.com/sandstone/bootstrap.min.css">sandstone</option>
+                    <option value="http://bootswatch.com/paper/bootstrap.min.css">paper</option>
+                    <option value="http://bootswatch.com/journal/bootstrap.min.css">journal</option>
+                    <option value="http://bootswatch.com/flatly/bootstrap.min.css">flatly</option>
+                    <option value="http://bootswatch.com/darkly/bootstrap.min.css">darkly</option>
+                    <option value="http://bootswatch.com/cerulean/bootstrap.min.css">cerulean</option>
+                </select>
+            </li>
           </ul>
 
 
-        <select id="css">
-            <option></option>
-            <option value="http://bootswatch.com/cyborg/bootstrap.min.css">cyborg</option>
-            <option value="http://bootswatch.com/yeti/bootstrap.min.css">yeti</option>
-            <option value="http://bootswatch.com/superhero/bootstrap.min.css">superhero</option>
-            <option value="http://bootswatch.com/sandstone/bootstrap.min.css">sandstone</option>
-            <option value="http://bootswatch.com/paper/bootstrap.min.css">paper</option>
-            <option value="http://bootswatch.com/journal/bootstrap.min.css">journal</option>
-            <option value="http://bootswatch.com/flatly/bootstrap.min.css">flatly</option>
-            <option value="http://bootswatch.com/darkly/bootstrap.min.css">darkly</option>
-            <option value="http://bootswatch.com/cerulean/bootstrap.min.css">cerulean</option>
-        </select>
+
 
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

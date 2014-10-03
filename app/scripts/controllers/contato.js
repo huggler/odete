@@ -8,10 +8,22 @@
  * Controller of the angularApp
  */
 angular.module('angularApp')
-  .controller('ContatoCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('ContatoCtrl', function ($scope, $http) {
+
+	$scope.user = {};
+	$scope.message = '';
+	$scope.success = '';
+
+  	$scope.sendContact = function(){
+		$http({
+		        method  : 'POST',
+		        url     : 'process.php',
+		        data    : $.param($scope.user),  // pass in data as strings
+		        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+		    }).success(function() {
+		                $scope.success = 'true';
+		        }).error(function() {
+		    	$scope.success = 'false';
+		    });
+	    };
   });

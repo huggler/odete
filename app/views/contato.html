@@ -10,11 +10,24 @@
         </div>
     </div>
 </div>
+
+
 <div class="container">
+
+    <div class="alert alert-danger alert-dismissible" role="alert" ng-show="success == 'false'">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <strong>Ops!</strong> Sua mensagem nao foi enviada.
+    </div>
+
+    <div class="alert alert-success alert-dismissible" role="alert" ng-show="sucess == 'true'">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <strong>Obrigado!</strong> Sua mensagem enviada com sucesso.
+    </div>
+
     <div class="row">
         <div class="col-md-8">
             <div class="well well-sm">
-                <form>
+                <form action="" method="post" accept-charset="utf-8" class="form" role="form" name="form">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -23,7 +36,7 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-user"></span>
                                 </span>
-                                <input type="nome" class="form-control" id="nome" placeholder="Nome" required="required" />
+                                <input type="nome" class="form-control" id="nome" placeholder="Nome" ng-model="user.name" required="required" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -32,12 +45,12 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-envelope"></span>
                                 </span>
-                                <input type="email" class="form-control" id="email" placeholder="E-mail" required="required" />
+                                <input type="email" class="form-control" id="email" placeholder="E-mail" ng-model="user.email" required="required" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="subject">Assunto</label>
-                            <select id="subject" name="subject" class="form-control input-lg" required="required">
+                            <select id="subject" name="subject" class="form-control input-lg" ng-model="user.subject" required="required">
                                 <option value="na" selected=""></option>
                                 <option value="service">Serviços</option>
                                 <option value="suggestions">Sugestões</option>
@@ -49,12 +62,12 @@
                         <div class="form-group">
                             <label for="name">
                                 Mensagem</label>
-                            <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
+                            <textarea name="message" id="message" class="form-control" ng-model="user.message" rows="9" cols="25" required="required"
                                 placeholder="Mensagem"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                        <button ng-click="sendContact()" type="submit" class="btn btn-primary pull-right" id="btnContactUs" ng-disabled="form.$invalid">
                             Enviar Mensagem</button>
                     </div>
                 </div>
@@ -62,7 +75,6 @@
             </div>
         </div>
         <div class="col-md-4">
-            <form>
             <legend><span class="glyphicon glyphicon-globe"></span> Nosso escritório</legend>
             <address>
                 <strong>Hagility</strong><br>
@@ -76,7 +88,6 @@
                 <strong>Fale conosco</strong><br>
                 <a href="mailto:#">me@hagility.com.br</a>
             </address>
-            </form>
         </div>
     </div>
 </div>
