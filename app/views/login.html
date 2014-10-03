@@ -2,6 +2,7 @@
     <form class="form-signin" data-ember-action="2">
         <small class="text-muted">Acesse com sua rede social favorita</small>
         <p>
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
             <a class="btn btn-primary social-login-btn social-facebook" href="/auth/facebook"><i class="fa fa-facebook"></i></a>
             <a class="btn btn-primary social-login-btn social-twitter" href="/auth/twitter"><i class="fa fa-twitter"></i></a>
         </p>

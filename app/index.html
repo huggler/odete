@@ -66,8 +66,12 @@
             <li ui-sref-active="active"><a href="#/login" ui-sref="login">Login</a></li>
             <li ui-sref-active="active"><a href="#/pesquisar" ui-sref="pesquisar">Pesquisar</a></li>
             <li ui-sref-active="active"><a href="#/cadastro" ui-sref="cadastro">Cadastro</a></li>
+            <li class="dropdown">
+                <div id="status" class="dropdown-toggle" data-toggle="dropdown">
+                </div>
+            </li>
             <li>
-                <select id="css">
+                <select id="css" hidden>
                     <option></option>
                     <option value="http://bootswatch.com/cyborg/bootstrap.min.css">cyborg</option>
                     <option value="http://bootswatch.com/yeti/bootstrap.min.css">yeti</option>
@@ -82,7 +86,7 @@
             </li>
           </ul>
 
-
+        <!--<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>-->
 
 
         </div><!-- /.navbar-collapse -->
