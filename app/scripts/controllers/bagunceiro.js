@@ -10,9 +10,40 @@
 var geocoder;
 
 angular.module('angularApp')
-  .controller('BagunceiroCtrl', function ($scope, $http, Restangular) {
+  .controller('BagunceiroCtrl', function ($scope, $http) {
 
-    $scope.projects = Restangular.all('projects').getList().$object;
+    //$scope.projects = Restangular.all('projects').getList().$object;
+
+    $scope.loginFacebook = function(){
+      FB.getLoginStatus(function(response) {
+        if(response.status === 'connected' ){
+
+            FB.api('/me', function(response) {
+              $scope.renderMe(response);
+            });
+
+        }else{
+          FB.login(function() {
+            FB.api('/me', function(response) {
+              $scope.renderMe(response);
+            });
+          });
+        }
+      });
+    };
+
+    $scope.renderMe = function(response){
+      console.log(response);
+      $scope.firstname = response.first_name;
+      $scope.lastname = response.last_name;
+      $scope.email = response.email;
+
+      $scope.dia = parseInt(response.birthday.split('/')[1], 10);
+      $scope.mes = parseInt(response.birthday.split('/')[0], 10);
+      $scope.ano = parseInt(response.birthday.split('/')[2], 10);
+
+      $scope.gender = response.gender;
+    };
 
     $scope.save = function(){};
 
@@ -33,7 +64,6 @@ angular.module('angularApp')
           navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.handleError);
       }
     };
-
 
     $scope.showPosition = function(position) {
         //$scope.showMap(position);

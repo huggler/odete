@@ -33,29 +33,30 @@ angular
     // fake the initial load so first time users can see the bar right away:
     $scope.start();
   })
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $urlRouterProvider.otherwise('/');
+    $locationProvider.html5Mode(true).hashPrefix('!');
 
     $stateProvider
       .state('main', {
         url: '/',
-        templateUrl: 'views/main.html',
+        templateUrl: '/views/main.html',
         controller: 'MainCtrl'
       })
       .state('about', {
         url: '/about',
-        templateUrl: 'views/about.html',
+        templateUrl: '/views/about.html',
         controller: 'AboutCtrl'
       })
       .state('contato', {
         url: '/contato',
-        templateUrl: 'views/contato.html',
+        templateUrl: '/views/contato.html',
         controller: 'ContatoCtrl'
       })
       .state('servicos', {
         url: '/servicos',
-        templateUrl: 'views/servicos.html',
+        templateUrl: '/views/servicos.html',
         controller: 'ServicosCtrl'
       })
       .state('login', {
@@ -65,24 +66,24 @@ angular
       })
       .state('cadastro', {
         url: '/cadastro',
-        templateUrl: 'views/cadastro.html',
+        templateUrl: '/views/cadastro.html',
         controller: 'CadastroCtrl'
       })
       .state('bagunceiro', {
         parent: 'cadastro',
         url: '/bagunceiro',
-        templateUrl: 'views/bagunceiro.html',
+        templateUrl: '/views/bagunceiro.html',
         controller: 'BagunceiroCtrl'
       })
       .state('odete', {
         parent: 'cadastro',
         url: '/odete',
-        templateUrl: 'views/xibata.html',
+        templateUrl: '/views/xibata.html',
         controller: 'BagunceiroCtrl'
       })
       .state('pesquisar', {
         url: '/pesquisar',
-        templateUrl: 'views/pesquisar.html',
+        templateUrl: '/views/pesquisar.html',
         controller: 'PesquisarCtrl'
       });
   }).run(function($rootScope,$state,$stateParams){
@@ -90,8 +91,74 @@ angular
     $rootScope.$stateParams = $stateParams;
 });
 
+  function testAPI() {
+    FB.api('/me', function(response) {
+      document.getElementById('status').innerHTML = '<a class="dropdown-toggle" data-toggle="dropdown">Olá, ' + response.first_name + '! <img src="http://graph.facebook.com/'+ response.id + '/picture"/ class="img-circle"/><b class="caret"></b></a><ul class="dropdown-menu"><li><button class="btn btn-block btn-primary btn-logout">sair</button></li></ul>';
+    });
+  }
+
+// This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = '';
+    }
+  }
+
+  function logout(){
+    FB.logout(function(response){
+      statusChangeCallback(response);
+    });
+  }
+
+  function login(callback){
+    FB.login(function(response) {
+      if(callback){
+        callback(response);
+      }else{
+        statusChangeCallback(response);
+      }
+    },{scope: 'publish_actions,user_location,user_about_me,email,user_birthday,user_friends'});
+  }
+
+//age_range,user_birthday,public_profile,user_friends
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  /*function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }*/
 
 $(document).ready(function(){
+
+  /* usado para fechar o menu */
+  $('.navbar-collapse a').click(function(){
+      //$(".navbar-collapse").collapse('hide');
+      //$('.navbar-collapse').removeClass('in');
+      
+      var toggle = $('.navbar-toggle').is(':visible');
+      if (toggle) {
+        $('.navbar-collapse').collapse('hide');
+      }
+  });
+
+
 
   /* usado para alternar o css */    
   $('#css').change(function(){
@@ -154,51 +221,14 @@ $(document).ready(function(){
   $(document).on('click', '.btn-remove', removeFormGroup);
   $(document).on('click', '.dropdown-menu a', selectFormGroup);
 
+  $(document).on('click', '#btn-login-facebook', login);
+  $(document).on('click', '.btn-logout', logout);
+
+
 });
 
 
-function testAPI() {
-  FB.api('/me', function(response) {
-    console.log(response);
-    document.getElementById('status').innerHTML = '<a class="dropdown-toggle" data-toggle="dropdown">Olá, ' + response.name + '! <img src="http://graph.facebook.com/'+ response.id + '/picture"/ class="img-circle"/><b class="caret"></b></a><ul class="dropdown-menu"><li onclick="logout()">sair</li></ul>';
-  });
-};
 
-function logout(){
-  FB.logout(function(response){
-    statusChangeCallback(response);
-  })
-};
-
-// This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = '';
-    }
-  };
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  };
 
 
 
