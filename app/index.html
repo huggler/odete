@@ -63,13 +63,10 @@
             <li ui-sref-active="active"><a href="/about" ui-sref="about">Como funciona?</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li ui-sref-active="active"><a href="/login" ui-sref="login">Login</a></li>
+            <li ui-sref-active="active" id="menu-login"><a href="/login" ui-sref="login">Login</a></li>
             <li ui-sref-active="active"><a href="/pesquisar" ui-sref="pesquisar">Pesquisar</a></li>
-            <li ui-sref-active="active"><a href="/cadastro" ui-sref="cadastro">Cadastro</a></li>
-            <li class="dropdown">
-                <div id="status" class="dropdown-toggle" data-toggle="dropdown">
-                </div>
-            </li>
+            <li ui-sref-active="active" id="menu-cadastro"><a href="/cadastro" ui-sref="cadastro">Cadastro</a></li>
+            <li class="dropdown" id="status"></li>
             <li>
                 <select id="css" hidden>
                     <option></option>

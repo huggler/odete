@@ -93,7 +93,7 @@ angular
 
   function testAPI() {
     FB.api('/me', function(response) {
-      document.getElementById('status').innerHTML = '<a class="dropdown-toggle" data-toggle="dropdown">Olá, ' + response.first_name + '! <img src="http://graph.facebook.com/'+ response.id + '/picture"/ class="img-circle"/><b class="caret"></b></a><ul class="dropdown-menu"><li><button class="btn btn-block btn-primary btn-logout">sair</button></li></ul>';
+      document.getElementById('status').innerHTML = '<a href="#" class="dropdown-toggle dropdown-perfil" data-toggle="dropdown">Olá, ' + response.first_name + '! <img src="http://graph.facebook.com/'+ response.id + '/picture"/ class="img-circle"/><b class="caret"></b></a><ul class="dropdown-menu"><li><a href="#"><i class="glyphicon glyphicon-user"></i> Meu Perfil</a></li><li><a href="#"><i class="glyphicon glyphicon-tasks"></i> Histórico</a></li><li><a href="#"><i class="glyphicon glyphicon-calendar"></i> Agenda</a></li><li class="divider"></li><li><a href="#" class="btn-logout"><i class="glyphicon glyphicon-share-alt"></i> Sair</a></li></ul>';
     });
   }
 
@@ -149,16 +149,11 @@ $(document).ready(function(){
 
   /* usado para fechar o menu */
   $('.navbar-collapse a').click(function(){
-      //$(".navbar-collapse").collapse('hide');
-      //$('.navbar-collapse').removeClass('in');
-      
       var toggle = $('.navbar-toggle').is(':visible');
       if (toggle) {
         $('.navbar-collapse').collapse('hide');
       }
   });
-
-
 
   /* usado para alternar o css */    
   $('#css').change(function(){
@@ -223,8 +218,6 @@ $(document).ready(function(){
 
   $(document).on('click', '#btn-login-facebook', login);
   $(document).on('click', '.btn-logout', logout);
-
-
 });
 
 
