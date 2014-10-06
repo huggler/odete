@@ -14,10 +14,17 @@ angular.module('angularApp')
 
     //$scope.projects = Restangular.all('projects').getList().$object;
 
+    $scope.firstname;
+    $scope.lastname;
+    $scope.email;
+    $scope.dia;
+    $scope.mes;
+    $scope.ano;
+    $scope.gender;
+
     $scope.loginFacebook = function(){
       FB.getLoginStatus(function(response) {
         if(response.status === 'connected' ){
-
             FB.api('/me', function(response) {
               $scope.renderMe(response);
             });
@@ -33,7 +40,6 @@ angular.module('angularApp')
     };
 
     $scope.renderMe = function(response){
-      console.log(response);
       $scope.firstname = response.first_name;
       $scope.lastname = response.last_name;
       $scope.email = response.email;
@@ -43,6 +49,8 @@ angular.module('angularApp')
       $scope.ano = parseInt(response.birthday.split('/')[2], 10);
 
       $scope.gender = response.gender;
+
+      $scope.$apply();
     };
 
     $scope.save = function(){};
@@ -141,7 +149,6 @@ angular.module('angularApp')
                          }
                      }
 
-                     console.log(objCep);
                      $scope.cep = objCep;
                      $scope.$apply();
                  }
