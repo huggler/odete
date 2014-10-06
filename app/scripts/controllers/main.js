@@ -9,9 +9,24 @@
  */
 angular.module('angularApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
+  	$scope.result = 2545;
+
+  	$scope.filterFaxinar = function(chk){
+  		if($scope.faxinar){
+			$scope.result += 200;
+		}else{
+			$scope.result -= 200;
+  		}
+  	};
+
+  	$scope.filterPassar = function(chk){
+  		if($scope.passar){
+			$scope.result += 200;
+		}else{
+			$scope.result -= 200;
+  		}
+  	};
+
+
   });

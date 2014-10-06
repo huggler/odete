@@ -11,12 +11,17 @@
 <!-- minhas preferencias -->
 <div class="container">
     <div class="row">
-        <form>
+        <div class="col-lg-12">
+            <p class="text-center">Temos <strong>{{result}}</strong> odetes!</p>
+        </div>
+    </div>
+    <div class="row">
+        <form class="form-filter">
             <div class="col-lg-3 col-xs-6">
                 <div class="form-group">
-                    <div class="input-group input-group-lg">
+                    <div class="input-group input-group-sm">
                         <span class="input-group-addon">
-                            <input type="checkbox">
+                            <input type="checkbox" ng-model="faxinar" data-value="200" id="faxinar" ng-click="filterFaxinar()"/>
                         </span>
                         <input type="text" class="form-control" placeholder="Faxinar">
                     </div>
@@ -25,20 +30,9 @@
             
             <div class="col-lg-3 col-xs-6">
                 <div class="form-group">
-                    <div class="input-group input-group-lg">
+                    <div class="input-group input-group-sm">
                         <span class="input-group-addon">
-                            <input type="checkbox">
-                        </span>
-                        <input type="text" class="form-control" placeholder="Lavar">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-xs-6">
-                <div class="form-group">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon">
-                            <input type="checkbox">
+                            <input type="checkbox" ng-model="passar" id="passar" data-value="1200" ng-click="filterPassar()"/>
                         </span>
                         <input type="text" class="form-control" placeholder="Passar">
                     </div>
@@ -47,9 +41,20 @@
 
             <div class="col-lg-3 col-xs-6">
                 <div class="form-group">
-                    <div class="input-group input-group-lg">
+                    <div class="input-group input-group-sm">
                         <span class="input-group-addon">
-                            <input type="checkbox">
+                            <input type="checkbox" ng-model="lavar" id="lavar" data-value="300" ng-click="filterLavar()"/>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Lavar">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+                <div class="form-group">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">
+                            <input type="checkbox" ng-model="cozinhar" id="cozinhar" data-value="400" ng-click="filterCozinhar()"/>
                         </span>
                         <input type="text" class="form-control input-sm" placeholder="Cozinhar">
                     </div>
@@ -61,7 +66,7 @@
     <div class="row">
       <div class="col-lg-6">
         <div class="form-group">
-            <div class="input-group input-group-lg">
+            <div class="input-group input-group-sm">
               <input type="date" class="form-control">
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -71,7 +76,7 @@
       </div>
       <div class="col-lg-6">
         <div class="form-group">
-            <select class="form-control input-lg">
+            <select class="form-control input-sm">
                 <option>Meio Período</option>
             </select>
         </div>
