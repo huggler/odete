@@ -44,6 +44,11 @@ angular
         templateUrl: '/views/main.html',
         controller: 'MainCtrl'
       })
+      .state('calendar', {
+        url: '/calendar',
+        templateUrl: '/views/calendar.html',
+        controller: 'CalendarCtrl'
+      })
       .state('about', {
         url: '/about',
         templateUrl: '/views/about.html',
@@ -93,7 +98,7 @@ angular
 
   function testAPI() {
     FB.api('/me', function(response) {
-      document.getElementById('status').innerHTML = '<a href="#" class="dropdown-toggle dropdown-perfil" data-toggle="dropdown">Olá, ' + response.first_name + '! <img src="http://graph.facebook.com/'+ response.id + '/picture"/ class="img-circle"/><b class="caret"></b></a><ul class="dropdown-menu"><li><a href="#"><i class="glyphicon glyphicon-user"></i> Meu Perfil</a></li><li><a href="#"><i class="glyphicon glyphicon-tasks"></i> Histórico</a></li><li><a href="#"><i class="glyphicon glyphicon-calendar"></i> Agenda</a></li><li class="divider"></li><li><a href="#" class="btn-logout"><i class="glyphicon glyphicon-share-alt"></i> Sair</a></li></ul>';
+      document.getElementById('status').innerHTML = '<a href="#" class="dropdown-toggle dropdown-perfil" data-toggle="dropdown">Olá, ' + response.first_name + '! <img src="http://graph.facebook.com/'+ response.id + '/picture"/ class="img-circle"/><b class="caret"></b></a><ul class="dropdown-menu"><li><a href="#"><i class="glyphicon glyphicon-user"></i> Meu Perfil</a></li><li><a href="#"><i class="glyphicon glyphicon-tasks"></i> Histórico</a></li><li><a href="/calendar"><i class="glyphicon glyphicon-calendar"></i> Agenda</a></li><li class="divider"></li><li><a href="#" class="btn-logout"><i class="glyphicon glyphicon-share-alt"></i> Sair</a></li></ul>';
     });
   }
 
@@ -129,7 +134,7 @@ angular
       }else{
         statusChangeCallback(response);
       }
-    },{scope: 'publish_actions,user_location,user_about_me,email,user_birthday,user_friends'});
+    },{scope: 'public_profile,publish_actions,user_location,user_about_me,email,user_birthday,user_friends'});
   }
 
 //age_range,user_birthday,public_profile,user_friends

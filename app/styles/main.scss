@@ -506,6 +506,12 @@ img {
                         -ms-filter: alpha(opacity=60);
                         filter: alpha(opacity=60);
                     }
+ .logotipo {
+  padding: 0 !important;
+ }                    
 .dropdown-perfil {
   padding: 0 15px !important;
+}
+.navbar-fixed-top .navbar-collapse {
+  max-height: 100% !important;
 }
