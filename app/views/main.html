@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">
-                            <input type="checkbox" ng-model="faxinar" data-value="200" id="faxinar" ng-click="filterFaxinar()"/>
+                            <input type="checkbox" ng-model="filters.faxinar" ng-change="updateResults()"/>
                         </span>
                         <input type="text" class="form-control" placeholder="Faxinar">
                     </div>
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">
-                            <input type="checkbox" ng-model="passar" id="passar" data-value="1200" ng-click="filterPassar()"/>
+                            <input type="checkbox" ng-model="filters.passar" ng-change="updateResults()"/>
                         </span>
                         <input type="text" class="form-control" placeholder="Passar">
                     </div>
@@ -44,7 +44,7 @@
                 <div class="form-group">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">
-                            <input type="checkbox" ng-model="lavar" id="lavar" data-value="300" ng-click="filterLavar()"/>
+                            <input type="checkbox" ng-model="filters.data" ng-change="updateResults()"/>
                         </span>
                         <input type="text" class="form-control" placeholder="Lavar">
                     </div>
@@ -55,7 +55,7 @@
                 <div class="form-group">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">
-                            <input type="checkbox" ng-model="cozinhar" id="cozinhar" data-value="400" ng-click="filterCozinhar()"/>
+                            <input type="checkbox" ng-model="filters.periodo" ng-change="updateResults()"/>
                         </span>
                         <input type="text" class="form-control input-sm" placeholder="Cozinhar">
                     </div>
@@ -89,7 +89,7 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <select class="form-control input-sm">
+                <select class="form-control input-sm" ng-model="filters.uf" ng-change="updateResults()">
                     <option>UF</option>
                 </select>
                 <span class="input-group-btn">
@@ -101,7 +101,7 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Cidade"/>
+                <input type="text" class="form-control" placeholder="Cidade" ng-model="filters.cidade" ng-change="updateResults()"/>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                 </span>
@@ -111,7 +111,7 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Bairro"/>
+                <input type="text" class="form-control" placeholder="Bairro" ng-model="filters.bairro" ng-change="updateResults()"/>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                 </span>

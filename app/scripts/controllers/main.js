@@ -8,25 +8,27 @@
  * Controller of the angularApp
  */
 angular.module('angularApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $http) {
+
 
   	$scope.result = 2545;
+    $scope.filters = {};
+    $scope.filters.faxinar = false;
+    $scope.filters.passar = false;
+    $scope.filters.lavar = false;
+    $scope.filters.cozinhar = false;
 
-  	$scope.filterFaxinar = function(chk){
-  		if($scope.faxinar){
-			$scope.result += 200;
-		}else{
-			$scope.result -= 200;
-  		}
-  	};
+    $scope.filters.data = '';
+    $scope.filters.periodo = '';
 
-  	$scope.filterPassar = function(chk){
-  		if($scope.passar){
-			$scope.result += 200;
-		}else{
-			$scope.result -= 200;
-  		}
-  	};
+    $scope.filters.uf = '';
+    $scope.filters.cidade = '';
+    $scope.filters.bairro = '';
 
+    $scope.updateResults = function(){
+      $http.get("results.json", { data : $scope.filters }).then(function(data){
+        $scope.result = data.data;
+      });
+    };
 
   });
