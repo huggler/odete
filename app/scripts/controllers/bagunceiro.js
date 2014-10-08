@@ -14,13 +14,13 @@ angular.module('angularApp')
 
     //$scope.projects = Restangular.all('projects').getList().$object;
 
-    $scope.firstname;
-    $scope.lastname;
-    $scope.email;
-    $scope.dia;
-    $scope.mes;
-    $scope.ano;
-    $scope.gender;
+    $scope.firstname = '';
+    $scope.lastname = '';
+    $scope.email = '';
+    $scope.dia = '';
+    $scope.mes = '';
+    $scope.ano = '';
+    $scope.gender = '';
 
     $scope.loginFacebook = function(){
       FB.getLoginStatus(function(response) {

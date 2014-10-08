@@ -10,15 +10,14 @@
 angular.module('angularApp')
   .controller('MainCtrl', function ($scope, $http) {
 
-
-  	$scope.result = 2545;
+  	$scope.result = 0;
     $scope.filters = {};
     $scope.filters.faxinar = false;
     $scope.filters.passar = false;
     $scope.filters.lavar = false;
     $scope.filters.cozinhar = false;
 
-    $scope.filters.data = '';
+    $scope.filters.data = new Date();
     $scope.filters.periodo = '';
 
     $scope.filters.uf = '';
@@ -26,9 +25,11 @@ angular.module('angularApp')
     $scope.filters.bairro = '';
 
     $scope.updateResults = function(){
-      $http.get("results.json", { data : $scope.filters }).then(function(data){
+      $http.get('back/index.php/pesquisar', { params : { data : $scope.filters }}).then(function(data){
         $scope.result = data.data;
       });
     };
+
+    $scope.updateResults();
 
   });
