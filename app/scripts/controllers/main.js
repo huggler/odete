@@ -30,6 +30,12 @@ angular.module('angularApp')
       });
     };
 
-    $scope.updateResults();
+    $scope.getCidades = function(){
+      $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar/cidade', { params : { data : $scope.filters }}).then(function(data){
+        $scope.filters.cidade = data.data;
+      });
+    };
 
+    $scope.updateResults();
+    $scope.getCidades();
   });
