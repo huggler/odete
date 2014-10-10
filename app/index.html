@@ -43,13 +43,19 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
+        
+
+
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" data-target-2=".navbar-collapse-container">
+          <div class="dropdown pull-right" id="status"></div>
+          <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" data-target-2=".navbar-collapse-container">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          
+
           <div class="navbar-brand logotipo">
             <h1><a href="/"><i class="icon-odete header"></i></a></h1>
           </div>
@@ -66,7 +72,7 @@
             <li ui-sref-active="active" id="menu-login"><a href="/login" ui-sref="login">Login</a></li>
             <li ui-sref-active="active"><a href="/pesquisar" ui-sref="pesquisar">Pesquisar</a></li>
             <li ui-sref-active="active" id="menu-cadastro"><a href="/cadastro" ui-sref="cadastro">Cadastro</a></li>
-            <li class="dropdown" id="status"></li>
+            
             <li>
                 <select id="css" hidden>
                     <option></option>

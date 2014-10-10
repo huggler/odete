@@ -13,14 +13,14 @@ angular.module('angularApp')
   .controller('BagunceiroCtrl', function ($scope, $http) {
 
     //$scope.projects = Restangular.all('projects').getList().$object;
-
-    $scope.firstname = '';
-    $scope.lastname = '';
-    $scope.email = '';
-    $scope.dia = '';
-    $scope.mes = '';
-    $scope.ano = '';
-    $scope.gender = '';
+    $scope.user = {};
+    $scope.user.firstname = '';
+    $scope.user.lastname = '';
+    $scope.user.email = '';
+    $scope.user.dia = '';
+    $scope.user.mes = '';
+    $scope.user.ano = '';
+    $scope.user.gender = '';
 
     $scope.loginFacebook = function(){
       FB.getLoginStatus(function(response) {
@@ -40,20 +40,24 @@ angular.module('angularApp')
     };
 
     $scope.renderMe = function(response){
-      $scope.firstname = response.first_name;
-      $scope.lastname = response.last_name;
-      $scope.email = response.email;
+      $scope.user.firstname = response.first_name;
+      $scope.user.lastname = response.last_name;
+      $scope.user.email = response.email;
 
-      $scope.dia = parseInt(response.birthday.split('/')[1], 10);
-      $scope.mes = parseInt(response.birthday.split('/')[0], 10);
-      $scope.ano = parseInt(response.birthday.split('/')[2], 10);
+      $scope.user.dia = parseInt(response.birthday.split('/')[1], 10);
+      $scope.user.mes = parseInt(response.birthday.split('/')[0], 10);
+      $scope.user.ano = parseInt(response.birthday.split('/')[2], 10);
 
-      $scope.gender = response.gender;
+      $scope.user.gender = response.gender;
 
       $scope.$apply();
     };
 
-    $scope.save = function(){};
+    $scope.save = function(){
+      $http.get('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', { params : { data : $scope.user }}).then(function(data){
+        $scope.result = data.data;
+      });
+    };
 
     $scope.getCep = function(){
       $http.get('http://cep.correiocontrol.com.br/'+ $scope.txtCep +'.json').success(function(data){
