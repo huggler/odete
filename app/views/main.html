@@ -1,5 +1,5 @@
 <div class="jumbotron text-center">
-  <h1><img src="images/logo-main.png"/> odete.com</h1>
+  <h1><i class="icon-odete main"></i> odete.com</h1>
   <p class="lead">
     a solução dos bagunceiros!<br>eu quero
   </p>
@@ -89,8 +89,8 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <select class="form-control input-sm" ng-model="filters.uf" ng-change="updateResults()">
-                    <option>UF</option>
+                <select class="form-control input-sm" ng-model="filters.estado" ng-change="updateResults()" ng-options="item.uf for item in filters.estados">
+                    <option value="">Estado</option>
                 </select>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-remove"></i></button>
@@ -101,7 +101,9 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Cidade" ng-model="filters.cidade" ng-change="updateResults()"/>
+                <select class="form-control" placeholder="Cidade" ng-model="filters.cidade" ng-change="updateResults()" ng-options="item.cidade for item in filters.cidades">
+                    <option value="">Cidade</option>
+                </select>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                 </span>
@@ -111,7 +113,9 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Bairro" ng-model="filters.bairro" ng-change="updateResults()"/>
+                <select class="form-control" placeholder="Bairro" ng-model="filters.bairro" ng-change="updateResults()" ng-options="item.bairro for item in filters.bairros">
+                    <option value="">Bairro</option>
+                </select>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                 </span>
