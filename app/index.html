@@ -63,11 +63,6 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-brand-centered">
-          <ul class="nav navbar-nav">
-            <li><a href="" data-toggle="modal" data-target="#myModal">Sobre</a></li>
-            <li ui-sref-active="active"><a href="/contato" ui-sref="contato">Contato</a></li>
-            <li ui-sref-active="active"><a href="/about" ui-sref="about">Como funciona?</a></li>
-          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li ui-sref-active="active" id="menu-login"><a href="/login" ui-sref="login">Login</a></li>
             <li ui-sref-active="active"><a href="/pesquisar" ui-sref="pesquisar">Pesquisar</a></li>
@@ -100,6 +95,21 @@
     <div ui-view class="navbar-collapse-container"></div>
 
     <div class="footer">
+        <div class="container">
+            <div class="row">
+                <hr size="1"/>
+                <div class="col-md-6">
+                    <ul class="nav nav-pills">
+                        <li><a href="" data-toggle="modal" data-target="#myModal">Sobre</a></li>
+                        <li><a href="/contato" ui-sref="contato">Contato</a></li>
+                        <li><a href="/about" ui-sref="about">Como funciona?</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 text-right hidden-xs">
+                    Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
     </div>
     <div class="fb-root" id="fb-root"></div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
