@@ -59,7 +59,12 @@ angular.module('angularApp')
       if (navigator.geolocation) {
           geocoder = new google.maps.Geocoder();
           navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.handleError);
-      }
+      }else{
+            $scope.getEstado();
+            $scope.getCidade();
+            $scope.getBairro();
+            $scope.updateResults();
+          }
     };
 
     $scope.showPosition = function(position) {
@@ -69,7 +74,7 @@ angular.module('angularApp')
     $scope.showAddress = function(position){
         var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-        var objCep = {
+        var location = {
           numero : 'street_number',
           cidade : 'locality',
           endereco : 'route',
@@ -102,32 +107,37 @@ angular.module('angularApp')
 
                           typeAdress = typeAdressList[b];
 
-                            if (typeAdress === objCep.numero) {
-                                objCep.numero = address.short_name;
+                            if (typeAdress === location.numero) {
+                                location.numero = address.short_name;
                             }
-                            if (typeAdress === objCep.cidade) {
-                                objCep.cidade = address.short_name;
+                            if (typeAdress === location.cidade) {
+                                $scope.filters.cidade = address.short_name;
                             }
-                            if (typeAdress === objCep.endereco) {
-                                objCep.endereco = address.short_name;
+                            if (typeAdress === location.endereco) {
+                                location.endereco = address.short_name;
                             }
-                            if (typeAdress === objCep.zip) {
-                                objCep.zip = address.short_name;
+                            if (typeAdress === location.zip) {
+                                location.zip = address.short_name;
                             }
-                            if (typeAdress === objCep.estado) {
-                                objCep.estado = address.short_name;
+                            if (typeAdress === location.estado) {
+                                $scope.filters.estado = address.short_name;
                             }
-                            if (typeAdress === objCep.bairro) {
-                                objCep.bairro = address.short_name;
+                            if (typeAdress === location.bairro) {
+                                $scope.filters.bairro = address.short_name;
                             }
-                            if (typeAdress === objCep.pais) {
-                                objCep.pais = address.short_name;
+                            if (typeAdress === location.pais) {
+                                location.pais = address.short_name;
                             }
                          }
                      }
 
-                     $scope.cep = objCep;
                      $scope.$apply();
+
+                    $scope.getEstado();
+                    $scope.getCidade();
+                    $scope.getBairro();
+
+                    $scope.updateResults();
                  }
             }
         });
@@ -150,10 +160,6 @@ angular.module('angularApp')
          }
     }; 
 
-    $scope.updateResults();
-    $scope.getEstado();
-    $scope.getCidade();
-    $scope.getBairro();
 
     $scope.getMarker();
   });

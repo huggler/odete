@@ -7,25 +7,31 @@
 
 
 <div class="container">
+
+    <span class="help-block text-center">
+        <small>{{result}} odetes em</small> <span class="glyphicon glyphicon-map-marker"></span> <a href="/pesquisar">{{filters.cidade}} * {{filters.bairro}}</a>
+    </span> 
+
     <div class="row">
-        <form>
-            <div class="form-group">
-              <div class="col-md-12">
-                <div class="input-group">
-                    <input class="form-control" placeholder="Pesquisar..."/>
-                    <span class="input-group-btn" data-toggle="collapse" data-target="#filter-panel">
-                        <button class="btn btn-default" type="button" title="Pesquisar...">
-                             <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        <button class="btn btn-primary" type="button">
-                            Filtros <span class="caret"></span>
-                        </button>
-                    </span>
+        <form class="">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Pesquisar..."/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" title="Pesquisar...">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
                 </div>
-                <span class="help-block text-center">
-                    <small>{{result}} odetes em</small> <span class="glyphicon glyphicon-map-marker"></span> <a href="#">{{cep.cidade}} * {{cep.bairro}}</a>
-                </span> 
-              </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#filter-panel">
+                    Filtros <span class="caret"></span>
+                    </button>
+                </div>
             </div>
         </form>
     </div>
@@ -90,7 +96,7 @@
         </form>
     </div>
 
-    <div class="row">
+    <div class="row" hidden>
       <div class="col-lg-6">
         <div class="form-group">
             <div class="input-group input-group-sm">
@@ -115,7 +121,7 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <select class="form-control input-sm" ng-model="filters.estado" ng-change="updateResults()" ng-options="item.uf for item in filters.estados">
+                <select class="form-control input-sm" ng-model="filters.estado" ng-change="updateResults();getCidade();" ng-options="item.uf as item.uf for item in filters.estados">
                     <option value="">Estado</option>
                 </select>
                 <span class="input-group-btn">
@@ -127,7 +133,7 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <select class="form-control" placeholder="Cidade" ng-model="filters.cidade" ng-change="updateResults()" ng-options="item.cidade for item in filters.cidades">
+                <select class="form-control" placeholder="Cidade" ng-model="filters.cidade" ng-change="updateResults();getBairro();" ng-options="item.cidade as item.cidade for item in filters.cidades">
                     <option value="">Cidade</option>
                 </select>
                 <span class="input-group-btn">
@@ -139,7 +145,7 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <select class="form-control" placeholder="Bairro" ng-model="filters.bairro" ng-change="updateResults()" ng-options="item.bairro for item in filters.bairros">
+                <select class="form-control" placeholder="Bairro" ng-model="filters.bairro" ng-change="updateResults()" ng-options="item.bairro as item.bairro for item in filters.bairros">
                     <option value="">Bairro</option>
                 </select>
                 <span class="input-group-btn">

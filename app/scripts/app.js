@@ -35,6 +35,7 @@ angular
   })
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
+
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true).hashPrefix('!');
 
@@ -44,6 +45,7 @@ angular
         templateUrl: '/views/main.html',
         controller: 'MainCtrl'
       })
+   
       .state('calendar', {
         url: '/calendar',
         templateUrl: '/views/calendar.html',
@@ -74,16 +76,16 @@ angular
         templateUrl: '/views/cadastro.html',
         controller: 'CadastroCtrl'
       })
+      .state('odete', {
+        parent: 'cadastro',
+        url: '/odete',
+        templateUrl: '/views/odete.html',
+        controller: 'OdeteCtrl'
+      })   
       .state('bagunceiro', {
         parent: 'cadastro',
         url: '/bagunceiro',
         templateUrl: '/views/bagunceiro.html',
-        controller: 'BagunceiroCtrl'
-      })
-      .state('odete', {
-        parent: 'cadastro',
-        url: '/odete',
-        templateUrl: '/views/xibata.html',
         controller: 'BagunceiroCtrl'
       })
       .state('pesquisar', {

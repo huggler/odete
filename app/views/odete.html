@@ -1,0 +1,338 @@
+<div class="container" id="wrap" ng-controller="BagunceiroCtrl">
+  <div class="row">
+    <div class="col-md-12">
+        <form accept-charset="utf-8" class="form go-right" role="form" name="formbagunceiro">
+            <legend>Cadastro de odete - <a href="#" ng-click="loginFacebook()">com facebook</a></legend>
+                
+                <div class="row">
+                    <div class="col-xs-6 col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <input type="text" name="firstname" value="" class="form-control input-lg" placeholder="Nome" ng-model="user.firstname" required />
+                            <label for="name">Nome</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <input type="text" name="lastname" value="" class="form-control input-lg" placeholder="SobreNome" ng-model="user.lastname" required />
+                            <label for="name">SobreNome</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="email" name="email" value="" class="form-control input-lg" placeholder="E-mail" ng-model="user.email"  />
+                            <label for="name">E-mail</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <input type="password" name="password" value="" class="form-control input-lg" ng-model="user.senha" placeholder="Senha"  />
+                            <label for="name">Senha</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <input type="password" name="confirm_password" value="" class="form-control input-lg" ng-model="user.confirmsenha" placeholder="Confirme a senha"  />
+                            <label for="name">Confirme a senha</label>
+                        </div>
+                    </div>
+                </div>
+
+                <strong>Data de Nascimento:</strong>
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <div class="form-group">
+                            <input type="number" name="dia" value="" required min="1" max="31" maxlength="2" class="form-control input-lg" ng-model="user.dia" placeholder="dd" />
+                            <label for="name">Dia</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <div class="form-group">
+                            <input type="number" name="mes" value="" required min="1" max="12" maxlength="2" class="form-control input-lg" ng-model="user.mes" placeholder="mm" />
+                            <label for="name">Mês</label>
+                            </div>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <div class="form-group">
+                            <input type="number" name="ano" value="" required min="1900" maxlength="4" class="form-control input-lg" ng-model="user.ano" placeholder="aaaa" />
+                            <label for="name">Ano</label>
+                            </div>
+                        </div>
+                </div>
+
+
+                <strong>Sexo:</strong>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                          <span class="input-group-addon">
+                             <input type="radio" name="sexo" value="male" ng-model="gender">
+                          </span>
+                          <input type="text" class="form-control" placeholder="Masculino">
+                        </div><!-- /input-group -->
+                    </div>
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                          <span class="input-group-addon">
+                            <input type="radio" name="sexo" value="female" ng-model="gender">
+                          </span>
+                          <input type="text" class="form-control" placeholder="Feminino">
+                        </div><!-- /input-group -->
+                    </div>
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+
+
+
+                <div class="row">
+                    <div class="col-md-12 multiple-form-group" data-max="3">
+                        <strong>Telefones:</strong>
+                        <div class="form-group input-group input-group-lg">
+                            <div class="input-group-btn input-group-select">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span class="concept">Operadora</span> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#phone">Tim</a></li>
+                                    <li><a href="#fax">Vivo</a></li>
+                                    <li><a href="#skype">Nextel</a></li>
+                                    <li><a href="#email">Oi</a></li>
+                                    <li><a href="#www">Claro</a></li>
+                                </ul>
+                                <input type="hidden" class="input-group-select-val" name="contacts['type'][]" value="Operadora">
+                            </div>
+                            <input type="tel" name="contacts['value'][]" class="form-control">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-success btn-add">+</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Meu Endereço</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <!-- ENDERECO -->
+                        <!-- ********************************************************************** -->
+                        <div class="form-enderecos">
+                            <fieldset>
+
+                              <!-- Form Name -->
+                              <legend hidden>Detalhes do endereço</legend>
+
+                          <div class="col-sm-12">
+                            <div class="form-group">
+                              <div id="map" style="overflow: hidden; max-height: 300px"></div>
+                          </div>
+                          </div>
+
+                            <!-- CEP e ENDERECO -->
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <input type="text" placeholder="Cep" name="txtCep" ng-model="user.zip" class="form-control">
+                                        <span class="input-group-btn">
+                                             <button class="btn btn-default" type="button">
+                                                <span class="glyphicon glyphicon-search" ng-click="getCep()" title="Pesquisar Cep"></span>
+                                            </button>
+                                            <button class="btn btn-default" type="button">
+                                                <span class="glyphicon glyphicon-map-marker" ng-click="getMarker()" title="Usar posição atual"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Endereço" ng-model="user.endereco" class="form-control input-lg">
+                                    <label for="name">Endereco</label>
+                                </div>
+                            </div>
+                            <!-- Complemento -->
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Numero" ng-model="user.numero" class="form-control input-lg">
+                                    <label for="name">Numero</label>
+                                </div>
+                            </div>
+                            <!-- FIM CEP e ENDERECO -->
+
+                            <!-- UF, CIDADE, BAIRRO -->
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <select name="id_estados" id="id_estados" class="form-control input-lg" ng-model="user.estado">
+                                        <option>Escolha o Estado</option>
+                                        <option value="AC">Acre</option>
+                                        <option value="AL">Alagoas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="ES">Espirito Santo</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="MT">Mato Grosso</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="PB">Paraiba</option>
+                                        <option value="PR">Paraná</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="SC">Santa Catarina</option>
+                                        <option value="SP">São Paulo</option>
+                                        <option value="SE">Sergipe</option>
+                                        <option value="TO">Tocantis</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Cidade" ng-model="user.cidade" class="form-control input-lg">
+                                    <label for="name">Cidade</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Bairro" ng-model="user.bairro" class="form-control input-lg">
+                                    <label for="name">Bairro</label>
+                                </div>
+                            </div>
+                            <!-- UF, CIDADE, BAIRRO -->
+
+
+                            <!-- minhas config -->
+                            <legend hidden>Configurações do local</legend>
+                                <div class="col-lg-3 col-xs-12">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-home"></span>
+                                            </span>
+                                            <input type="number" class="form-control input-sm" placeholder="Metragem">
+                                            <span class="input-group-addon input-sm">m2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-3 col-xs-12">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-credit-card"></span>
+                                            </span>
+                                            <input type="number" class="form-control input-sm" placeholder="Cobro até">
+                                            <span class="input-group-addon input-sm">R$</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-xs-12">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-tag"></i>
+                                            </span>
+                                            <input type="number" class="form-control input-sm" placeholder="Qtde Quartos">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-xs-12">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-tags"></i>
+                                            </span>
+                                            <input type="number" class="form-control input-sm" placeholder="Qtde Banheiros">
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- fim minhas config -->
+                            
+
+        <form class="form-filter">
+            <legend hidden>Temos <strong>{{result}}</strong> odetes!</legend>
+            <div class="col-lg-3 col-xs-6">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">
+                            <input type="checkbox" ng-model="filters.faxinar" ng-change="updateResults()"/>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Faxinar">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-xs-6">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">
+                            <input type="checkbox" ng-model="filters.passar" ng-change="updateResults()"/>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Passar">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">
+                            <input type="checkbox" ng-model="filters.data" ng-change="updateResults()"/>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Lavar">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">
+                            <input type="checkbox" ng-model="filters.cozinhar" ng-change="updateResults()"/>
+                        </span>
+                        <input type="text" class="form-control input-sm" placeholder="Cozinhar">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+
+                            </fieldset>
+                        </div>
+                        <!-- ********************************************************************** -->
+                        <!-- FIM ENDERECO -->
+
+                    </div>
+                    <div class="panel-footer" hidden>Insira a quantidade de endereços que desejar.</div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" ng-click="save()">Criar minha conta</button>
+                </div>
+
+        </form>          
+    </div>
+  </div>            
+</div>

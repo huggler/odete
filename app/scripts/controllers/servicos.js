@@ -9,11 +9,5 @@
  */
 angular.module('angularApp')
   .controller('ServicosCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-
-    $scope.add = function(){};
+  $scope.add = function(){};
   });

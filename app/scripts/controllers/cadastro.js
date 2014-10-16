@@ -9,11 +9,6 @@
  */
 angular.module('angularApp')
   .controller('CadastroCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
 
     $scope.loadRegister = function(type){
     	if(type === 'odete'){
