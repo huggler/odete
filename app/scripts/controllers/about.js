@@ -8,5 +8,5 @@
  * Controller of the angularApp
  */
 angular.module('angularApp')
-  .controller('AboutCtrl', function ($scope) {
+  .controller('AboutCtrl', function () {
   });

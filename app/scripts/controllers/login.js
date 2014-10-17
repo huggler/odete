@@ -8,5 +8,5 @@
  * Controller of the angularApp
  */
 angular.module('angularApp')
-  .controller('LoginCtrl', function ($scope) {
+  .controller('LoginCtrl', function () {
   });

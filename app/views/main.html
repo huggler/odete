@@ -9,7 +9,13 @@
 <div class="container">
 
     <span class="help-block text-center">
-        <small>{{result}} odetes em</small> <span class="glyphicon glyphicon-map-marker"></span> <a href="/pesquisar">{{filters.cidade}} * {{filters.bairro}}</a>
+        <small>{{result}} odetes em</small>
+        <span class="glyphicon glyphicon-map-marker"></span>
+        <a href="/pesquisar">
+            <span ng-show="filters.estado">{{filters.estado}}</span>
+            <span ng-show="filters.cidade">- {{filters.cidade}}</span>
+            <span ng-show="filters.bairro">- {{filters.bairro}}</span>
+        </a>
     </span> 
 
     <div class="row">
@@ -125,7 +131,7 @@
                     <option value="">Estado</option>
                 </select>
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                    <button class="btn btn-default" type="button" ng-click="clearEstado();"><i class="glyphicon glyphicon-remove"></i></button>
                 </span>
             </div>
         </div><!-- /.col-lg-6 -->
@@ -137,7 +143,7 @@
                     <option value="">Cidade</option>
                 </select>
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                    <button class="btn btn-default" type="button" ng-click="clearCidade();"><i class="glyphicon glyphicon-remove"></i></button>
                 </span>
             </div>            
         </div>
@@ -149,7 +155,7 @@
                     <option value="">Bairro</option>
                 </select>
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                    <button class="btn btn-default" type="button" ng-click="clearBairro();"><i class="glyphicon glyphicon-remove"></i></button>
                 </span>
             </div>            
         </div>

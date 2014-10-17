@@ -10,7 +10,7 @@
 var geocoder;
 
 angular.module('angularApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http, filters) {
 
   	$scope.result = 0;
     $scope.filters = {};
@@ -30,6 +30,8 @@ angular.module('angularApp')
     $scope.filters.cidades = '';
     $scope.filters.bairros = '';
 
+    $scope.total = filters.someMethod();
+
 
     $scope.updateResults = function(){
       $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar', { params : { data : $scope.filters }}).then(function(data){
@@ -43,16 +45,33 @@ angular.module('angularApp')
       });
     };
 
+    $scope.clearEstado = function(){
+      $scope.filters.estado = '';
+      $scope.clearCidade();
+      $scope.clearBairro();
+
+      $scope.updateResults();
+    };
+
     $scope.getCidade = function(){
       $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar/cidade', { params : { data : $scope.filters }}).then(function(data){
         $scope.filters.cidades = data.data;
       });
     };
 
+    $scope.clearCidade = function(){
+      $scope.filters.cidade = '';
+      $scope.clearBairro();
+    };
+
     $scope.getBairro = function(){
       $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar/bairro', { params : { data : $scope.filters }}).then(function(data){
         $scope.filters.bairros = data.data;
       });
+    };
+
+    $scope.clearBairro = function(){
+      $scope.filters.bairro = '';
     };
 
    $scope.getMarker = function(){
