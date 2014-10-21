@@ -12,15 +12,36 @@ var geocoder;
 angular.module('angularApp')
   .controller('BagunceiroCtrl', function ($scope, $http) {
 
-    //$scope.projects = Restangular.all('projects').getList().$object;
     $scope.user = {};
     $scope.user.firstname = '';
     $scope.user.lastname = '';
     $scope.user.email = '';
+
+    $scope.user.senha = '';
+    $scope.user.confirmsenha = '';
+
     $scope.user.dia = '';
     $scope.user.mes = '';
     $scope.user.ano = '';
+
     $scope.user.gender = '';
+
+    $scope.user.telefones = '';
+
+    $scope.user.cidade = '';
+    $scope.user.estado = '';
+    $scope.user.endereco = '';
+    $scope.user.bairro = '';
+    $scope.user.numero = '';
+    $scope.user.cep = '';
+
+    $scope.user.metragem = '';
+    $scope.user.valor = '';
+    $scope.user.quartos = '';
+    $scope.user.banheiros = '';
+
+    $scope.user.idfacebook = '';
+    $scope.success = '';    
 
     $scope.loginFacebook = function(){
       FB.getLoginStatus(function(response) {
@@ -48,6 +69,8 @@ angular.module('angularApp')
       $scope.user.mes = parseInt(response.birthday.split('/')[0], 10);
       $scope.user.ano = parseInt(response.birthday.split('/')[2], 10);
 
+      $scope.user.idfacebook = response.id;
+
       $scope.user.gender = response.gender;
 
       $scope.$apply();
@@ -55,15 +78,16 @@ angular.module('angularApp')
 
     $scope.save = function(){
       $http.get('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', { params : { data : $scope.user }}).then(function(data){
-        $scope.result = data.data;
+        $scope.success = data.data;
       });
     };
 
     $scope.getCep = function(){
-      $http.get('http://cep.correiocontrol.com.br/'+ $scope.txtCep +'.json').success(function(data){
-          $scope.localidade = data.localidade;
-          $scope.logradouro = data.logradouro;
-          $scope.bairro = data.bairro;
+      $http.get('http://cep.correiocontrol.com.br/'+ $scope.user.cep.replace(/\D/g, '') +'.json').success(function(data){
+          $scope.user.cidade = data.localidade;
+          $scope.user.endereco = data.logradouro;
+          $scope.user.bairro = data.bairro;
+          $scope.user.estado = data.uf;
 
           //http://cep.s1mp.net/40.310-000
       });
@@ -100,7 +124,7 @@ angular.module('angularApp')
           numero : 'street_number',
           cidade : 'locality',
           endereco : 'route',
-          zip : 'postal_code',
+          cep : 'postal_code',
           estado : 'administrative_area_level_1',
           bairro : 'neighborhood',
           pais : 'country'
@@ -130,30 +154,29 @@ angular.module('angularApp')
                           typeAdress = typeAdressList[b];
 
                             if (typeAdress === objCep.numero) {
-                                objCep.numero = address.short_name;
+                                $scope.user.numero = address.short_name;
                             }
                             if (typeAdress === objCep.cidade) {
-                                objCep.cidade = address.short_name;
+                                $scope.user.cidade = address.short_name;
                             }
                             if (typeAdress === objCep.endereco) {
-                                objCep.endereco = address.short_name;
+                                $scope.user.endereco = address.short_name;
                             }
-                            if (typeAdress === objCep.zip) {
-                                objCep.zip = address.short_name;
+                            if (typeAdress === objCep.cep) {
+                                $scope.user.cep = address.short_name;
                             }
                             if (typeAdress === objCep.estado) {
-                                objCep.estado = address.short_name;
+                                $scope.user.estado = address.short_name;
                             }
                             if (typeAdress === objCep.bairro) {
-                                objCep.bairro = address.short_name;
+                                $scope.user.bairro = address.short_name;
                             }
                             if (typeAdress === objCep.pais) {
-                                objCep.pais = address.short_name;
+                                $scope.user.pais = address.short_name;
                             }
                          }
                      }
 
-                     $scope.cep = objCep;
                      $scope.$apply();
                  }
             }
@@ -176,4 +199,13 @@ angular.module('angularApp')
             break;
          }
     };
-  });
+  }).directive('addTelefones', function() {
+    return {
+      restrict: 'A',
+      transclude: true,
+      scope: {},
+      templateUrl: '/views/add-Telefones.html',
+      link: function ($scope) {
+        $scope.telefones = 'Jeff';      }
+    };
+});

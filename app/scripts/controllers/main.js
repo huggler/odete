@@ -30,8 +30,19 @@ angular.module('angularApp')
     $scope.filters.cidades = '';
     $scope.filters.bairros = '';
 
+    $scope.quantity = 9;
+    $scope.orderProp = '';
+    //$scope.result = filters.someMethod();
+
     $scope.total = filters.someMethod();
 
+    $scope.search = function(){
+      $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar/colaboradores', { params : { data : $scope.filters }}).then(function(data){
+        $scope.data = data.data;
+      });
+    };
+
+    $scope.search();
 
     $scope.updateResults = function(){
       $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar', { params : { data : $scope.filters }}).then(function(data){
@@ -150,7 +161,7 @@ angular.module('angularApp')
                          }
                      }
 
-                     $scope.$apply();
+                    $scope.$apply();
 
                     $scope.getEstado();
                     $scope.getCidade();

@@ -2,8 +2,11 @@
   <div class="row">
     <div class="col-md-12">
         <form accept-charset="utf-8" class="form go-right" role="form" name="formbagunceiro">
-            <legend>Cadastro de bagunceiro(a) - <a href="#" ng-click="loginFacebook()">com facebook</a></legend>
-                
+            <legend>
+                <div class="form-group">
+                    Cadastro de bagunceiro(a) <a href="#" ng-click="loginFacebook()" class="btn btn-sm btn-primary"><i class="fa fa-facebook"></i> cadastrar com facebook</a>
+                </div>
+            </legend>
                 <div class="row">
                     <div class="col-xs-6 col-md-6 col-xs-12">
                         <div class="form-group">
@@ -22,7 +25,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="email" name="email" value="" class="form-control input-lg" placeholder="E-mail" ng-model="user.email"  />
+                            <input type="email" name="email" value="" class="form-control input-lg" placeholder="E-mail" ng-model="user.email" required />
                             <label for="name">E-mail</label>
                         </div>
                     </div>
@@ -31,13 +34,13 @@
                 <div class="row">
                     <div class="col-xs-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password" value="" class="form-control input-lg" ng-model="user.senha" placeholder="Senha"  />
+                            <input type="password" name="password" value="" class="form-control input-lg" ng-model="user.senha" placeholder="Senha" required />
                             <label for="name">Senha</label>
                         </div>
                     </div>
                     <div class="col-xs-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="confirm_password" value="" class="form-control input-lg" ng-model="user.confirmsenha" placeholder="Confirme a senha"  />
+                            <input type="password" name="confirm_password" value="" class="form-control input-lg" ng-model="user.confirmsenha" placeholder="Confirme a senha" required  />
                             <label for="name">Confirme a senha</label>
                         </div>
                     </div>
@@ -72,7 +75,7 @@
                     <div class="form-group">
                         <div class="input-group input-group-lg">
                           <span class="input-group-addon">
-                             <input type="radio" name="sexo" value="male" ng-model="gender">
+                             <input type="radio" name="sexo" value="male" ng-model="user.gender">
                           </span>
                           <input type="text" class="form-control" placeholder="Masculino">
                         </div><!-- /input-group -->
@@ -82,7 +85,7 @@
                     <div class="form-group">
                         <div class="input-group input-group-lg">
                           <span class="input-group-addon">
-                            <input type="radio" name="sexo" value="female" ng-model="gender">
+                            <input type="radio" name="sexo" value="female" ng-model="user.gender">
                           </span>
                           <input type="text" class="form-control" placeholder="Feminino">
                         </div><!-- /input-group -->
@@ -93,34 +96,12 @@
 
 
                 <div class="row">
-                    <div class="col-md-12 multiple-form-group" data-max="3">
-                        <strong>Telefones:</strong>
-                        <div class="form-group input-group input-group-lg">
-                            <div class="input-group-btn input-group-select">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span class="concept">Operadora</span> <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#phone">Tim</a></li>
-                                    <li><a href="#fax">Vivo</a></li>
-                                    <li><a href="#skype">Nextel</a></li>
-                                    <li><a href="#email">Oi</a></li>
-                                    <li><a href="#www">Claro</a></li>
-                                </ul>
-                                <input type="hidden" class="input-group-select-val" name="contacts['type'][]" value="Operadora">
-                            </div>
-                            <input type="tel" name="contacts['value'][]" class="form-control">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-success btn-add">+</button>
-                            </span>
-                        </div>
-                    </div>
                 </div>
 
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Meu Endereço</h3>
+                        <h3 class="panel-title">Detalhes do meu endereço</h3>
                     </div>
                     <div class="panel-body">
 
@@ -128,9 +109,6 @@
                         <!-- ********************************************************************** -->
                         <div class="form-enderecos">
                             <fieldset>
-
-                              <!-- Form Name -->
-                              <legend hidden>Detalhes do endereço</legend>
 
                           <div class="col-sm-12">
                             <div class="form-group">
@@ -142,7 +120,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <div class="input-group input-group-lg">
-                                        <input type="text" placeholder="Cep" name="txtCep" ng-model="user.zip" class="form-control">
+                                        <input type="text" placeholder="Cep" name="txtCep" ng-model="user.cep" class="form-control">
                                         <span class="input-group-btn">
                                              <button class="btn btn-default" type="button">
                                                 <span class="glyphicon glyphicon-search" ng-click="getCep()" title="Pesquisar Cep"></span>
@@ -172,7 +150,7 @@
                             <!-- UF, CIDADE, BAIRRO -->
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <select name="id_estados" id="id_estados" class="form-control input-lg" ng-model="user.estado">
+                                    <select name="id_estados" id="id_estados" class="form-control input-lg" ng-model="user.estado" required>
                                         <option>Escolha o Estado</option>
                                         <option value="AC">Acre</option>
                                         <option value="AL">Alagoas</option>
@@ -206,28 +184,30 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Cidade" ng-model="user.cidade" class="form-control input-lg">
+                                    <input type="text" placeholder="Cidade" ng-model="user.cidade" class="form-control input-lg"required>
                                     <label for="name">Cidade</label>
                                 </div>
                             </div>
                             <div class="col-sm-5">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Bairro" ng-model="user.bairro" class="form-control input-lg">
+                                    <input type="text" placeholder="Bairro" ng-model="user.bairro" class="form-control input-lg" required>
                                     <label for="name">Bairro</label>
                                 </div>
                             </div>
+
+                            </fieldset>
                             <!-- UF, CIDADE, BAIRRO -->
 
-
                             <!-- minhas config -->
-                            <legend hidden>Configurações do local</legend>
+                            <fieldset>
+                            <legend>Configurações do local</legend>
                                 <div class="col-lg-3 col-xs-12">
                                     <div class="form-group">
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-home"></span>
                                             </span>
-                                            <input type="number" class="form-control input-sm" placeholder="Metragem">
+                                            <input type="number" class="form-control input-sm" placeholder="Metragem" ng-model="user.metragem"/>
                                             <span class="input-group-addon input-sm">m2</span>
                                         </div>
                                     </div>
@@ -239,7 +219,7 @@
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-credit-card"></span>
                                             </span>
-                                            <input type="number" class="form-control input-sm" placeholder="Pago até">
+                                            <input type="number" class="form-control input-sm" placeholder="Pago até" ng-model="user.valor"/>
                                             <span class="input-group-addon input-sm">R$</span>
                                         </div>
                                     </div>
@@ -251,7 +231,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-tag"></i>
                                             </span>
-                                            <input type="number" class="form-control input-sm" placeholder="Qtde Quartos">
+                                            <input type="number" class="form-control input-sm" placeholder="Qtde Quartos" ng-model="user.quartos"/>
                                         </div>
                                     </div>
                                 </div>
@@ -262,7 +242,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-tags"></i>
                                             </span>
-                                            <input type="number" class="form-control input-sm" placeholder="Qtde Banheiros">
+                                            <input type="number" class="form-control input-sm" placeholder="Qtde Banheiros" ng-model="user.banheiros"/>
                                         </div>
                                     </div>
                                 </div>
@@ -278,9 +258,10 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" ng-click="save()">Criar minha conta</button>
+                    
+                    <button class="btn btn-lg btn-success btn-block" type="submit" ng-show="success != ''">Conta criada com sucesso</button>
+                    <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" ng-hide="success != ''" ng-disabled="formbagunceiro.$invalid" ng-click="save()">Criar minha conta</button>
                 </div>
-
         </form>          
     </div>
   </div>            

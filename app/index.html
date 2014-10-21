@@ -45,9 +45,11 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         
 
-
+        <div class="dropdown pull-right" id="status">
+            <a href="/login" ui-sref="login">Login</a>
+        </div>
         <div class="navbar-header">
-          <div class="dropdown pull-right" id="status"></div>
+          
           <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" data-target-2=".navbar-collapse-container">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -63,9 +65,7 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-brand-centered">
-          <ul class="nav navbar-nav">
-            <li ui-sref-active="active" id="menu-login"><a href="/login" ui-sref="login">Login</a></li>
-            <li ui-sref-active="active"><a href="/pesquisar" ui-sref="pesquisar">Pesquisar</a></li>
+          <ul class="nav navbar-nav pull-right">
             <li ui-sref-active="active" id="menu-cadastro"><a href="/cadastro" ui-sref="cadastro">Cadastro</a></li>
             
             <li>

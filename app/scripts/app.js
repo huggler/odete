@@ -129,13 +129,9 @@ angular
     });
   }
 
-  function login(callback){
+  function login(){
     FB.login(function(response) {
-      if(callback){
-        callback(response);
-      }else{
         statusChangeCallback(response);
-      }
     },{scope: 'public_profile,publish_actions,user_location,user_about_me,email,user_birthday,user_friends'});
   }
 
