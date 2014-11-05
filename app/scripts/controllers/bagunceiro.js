@@ -77,7 +77,10 @@ angular.module('angularApp')
     };
 
     $scope.save = function(){
-      $http.get('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', { params : { data : $scope.user }}).then(function(data){
+
+      var dataForm = $('#formbagunceiro').serialize();
+
+      $http.get('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', { params : { data : dataForm }}).then(function(data){
         $scope.success = data.data;
       });
     };
@@ -203,9 +206,8 @@ angular.module('angularApp')
     return {
       restrict: 'A',
       transclude: true,
-      scope: {},
       templateUrl: '/views/add-Telefones.html',
-      link: function ($scope) {
-        $scope.telefones = 'Jeff';      }
+      link: function () {
+      }
     };
 });
