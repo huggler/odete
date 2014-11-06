@@ -2,6 +2,9 @@
   <div class="row">
     <div class="col-md-12">
         <form accept-charset="utf-8" class="form go-right" role="form" name="formbagunceiro" id="formbagunceiro">
+            
+            <input type="hidden" name="idfacebook" value="" class="form-control input-lg" placeholder="Nome" ng-model="user.idfacebook" />
+
             <legend>
                 <div class="form-group">
                     Cadastro de bagunceiro(a) <a href="#" ng-click="loginFacebook()" class="btn btn-sm btn-primary"><i class="fa fa-facebook"></i> cadastrar com facebook</a>
@@ -34,13 +37,13 @@
                 <div class="row">
                     <div class="col-xs-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password" value="" class="form-control input-lg" ng-model="user.senha" placeholder="Senha" required />
+                            <input type="password" name="senha" value="" class="form-control input-lg" ng-model="user.senha" placeholder="Senha" required />
                             <label for="name">Senha</label>
                         </div>
                     </div>
                     <div class="col-xs-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="confirm_password" value="" class="form-control input-lg" ng-model="user.confirmsenha" placeholder="Confirme a senha" required  />
+                            <input type="password" name="confirmsenha" value="" class="form-control input-lg" ng-model="user.confirmsenha" placeholder="Confirme a senha" required  />
                             <label for="name">Confirme a senha</label>
                         </div>
                     </div>
@@ -75,7 +78,7 @@
                     <div class="form-group">
                         <div class="input-group input-group-lg">
                           <span class="input-group-addon">
-                             <input type="radio" name="sexo" value="male" ng-model="user.gender">
+                             <input type="radio" name="gender" value="male" ng-model="user.gender">
                           </span>
                           <input type="text" class="form-control" placeholder="Masculino">
                         </div><!-- /input-group -->
@@ -85,7 +88,7 @@
                     <div class="form-group">
                         <div class="input-group input-group-lg">
                           <span class="input-group-addon">
-                            <input type="radio" name="sexo" value="female" ng-model="user.gender">
+                            <input type="radio" name="gender" value="female" ng-model="user.gender">
                           </span>
                           <input type="text" class="form-control" placeholder="Feminino">
                         </div><!-- /input-group -->
@@ -120,7 +123,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <div class="input-group input-group-lg">
-                                        <input type="text" placeholder="Cep" name="txtCep" ng-model="user.cep" class="form-control">
+                                        <input type="text" placeholder="Cep" name="cep" ng-model="user.cep" class="form-control">
                                         <span class="input-group-btn">
                                              <button class="btn btn-default" type="button">
                                                 <span class="glyphicon glyphicon-search" ng-click="getCep()" title="Pesquisar Cep"></span>
@@ -134,14 +137,14 @@
                             </div>
                             <div class="col-sm-7">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Endereço" ng-model="user.endereco" class="form-control input-lg">
+                                    <input type="text" placeholder="Endereço" ng-model="user.endereco" name="endereco" class="form-control input-lg">
                                     <label for="name">Endereco</label>
                                 </div>
                             </div>
                             <!-- Complemento -->
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Numero" ng-model="user.numero" class="form-control input-lg">
+                                    <input type="text" placeholder="Numero" ng-model="user.numero" name="numero" class="form-control input-lg">
                                     <label for="name">Numero</label>
                                 </div>
                             </div>
@@ -150,7 +153,7 @@
                             <!-- UF, CIDADE, BAIRRO -->
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <select name="id_estados" id="id_estados" class="form-control input-lg" ng-model="user.estado" required>
+                                    <select name="estado" id="estado" class="form-control input-lg" ng-model="user.estado" required>
                                         <option>Escolha o Estado</option>
                                         <option value="AC">Acre</option>
                                         <option value="AL">Alagoas</option>
@@ -184,13 +187,13 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Cidade" ng-model="user.cidade" class="form-control input-lg"required>
+                                    <input type="text" placeholder="Cidade" ng-model="user.cidade" name="cidade" class="form-control input-lg"required>
                                     <label for="name">Cidade</label>
                                 </div>
                             </div>
                             <div class="col-sm-5">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Bairro" ng-model="user.bairro" class="form-control input-lg" required>
+                                    <input type="text" placeholder="Bairro" ng-model="user.bairro" name="bairro" class="form-control input-lg" required>
                                     <label for="name">Bairro</label>
                                 </div>
                             </div>
@@ -207,7 +210,7 @@
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-home"></span>
                                             </span>
-                                            <input type="number" class="form-control input-sm" placeholder="Metragem" ng-model="user.metragem"/>
+                                            <input type="number" class="form-control input-sm" placeholder="Metragem" name="metragem" ng-model="user.metragem"/>
                                             <span class="input-group-addon input-sm">m2</span>
                                         </div>
                                     </div>
@@ -219,7 +222,7 @@
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-credit-card"></span>
                                             </span>
-                                            <input type="number" class="form-control input-sm" placeholder="Pago até" ng-model="user.valor"/>
+                                            <input type="number" class="form-control input-sm" placeholder="Pago até" name="valor" ng-model="user.valor"/>
                                             <span class="input-group-addon input-sm">R$</span>
                                         </div>
                                     </div>
@@ -231,7 +234,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-tag"></i>
                                             </span>
-                                            <input type="number" class="form-control input-sm" placeholder="Qtde Quartos" ng-model="user.quartos"/>
+                                            <input type="number" class="form-control input-sm" placeholder="Qtde Quartos" name="quartos" ng-model="user.quartos"/>
                                         </div>
                                     </div>
                                 </div>
@@ -242,7 +245,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-tags"></i>
                                             </span>
-                                            <input type="number" class="form-control input-sm" placeholder="Qtde Banheiros" ng-model="user.banheiros"/>
+                                            <input type="number" class="form-control input-sm" placeholder="Qtde Banheiros" name="banheiros" ng-model="user.banheiros"/>
                                         </div>
                                     </div>
                                 </div>

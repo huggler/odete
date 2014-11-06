@@ -162,7 +162,9 @@ $(document).ready(function(){
   });
 
   /* usado para adicionar novos campos de telefones */
+  var countFrm=0;
   var addFormGroup = function (event) {
+      countFrm++;
       event.preventDefault();
 
       var $formGroup = $(this).closest('.form-group');
@@ -174,6 +176,9 @@ $(document).ready(function(){
           .html('–');
 
       $formGroupClone.find('input').val('');
+      $formGroupClone.find('.operadora').attr('name', 'telefones['+ countFrm +'].operadora');
+      $formGroupClone.find('.numero').attr('name', 'telefones['+ countFrm +'].numero');
+ 
       $formGroupClone.find('.concept').text('Operadora');
       $formGroupClone.insertAfter($formGroup);
 
