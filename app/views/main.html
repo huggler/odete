@@ -8,10 +8,9 @@
 
 
 <div class="container">
-
     <span class="help-block text-center">
-        <small>{{result}} odetes</small>
-        <span ng-show="filters.cidade != ''">
+        <small>{{result}} odete(s)</small>
+        <span ng-show="filters.estado">
              em <span class="glyphicon glyphicon-map-marker"></span>
             <a href="/pesquisar">
                 <span ng-show="filters.estado">{{filters.estado}}</span>
@@ -19,6 +18,9 @@
                 <span ng-show="filters.bairro">- {{filters.bairro}}</span>
             </a>
         </span>
+        <small ng-hide="filters.estado">
+            no site todo.
+        </small>
     </span> 
 </div>
 
@@ -106,7 +108,7 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <select class="form-control input-sm" ng-model="filters.estado" ng-change="updateResults();getCidade();" ng-options="item.uf as item.uf for item in filters.estados">
+                <select class="form-control input-sm" ng-model="filters.estado" ng-change="updateResults();filters.cidade='';filters.bairro='';getCidade();" ng-options="item.uf as item.uf for item in filters.estados">
                     <option value="">Estado</option>
                 </select>
                 <span class="input-group-btn">
@@ -118,7 +120,7 @@
       <div class="col-lg-4">
         <div class="form-group">
             <div class="input-group input-group-sm">
-                <select class="form-control" placeholder="Cidade" ng-model="filters.cidade" ng-change="updateResults();getBairro();" ng-options="item.cidade as item.cidade for item in filters.cidades">
+                <select class="form-control" placeholder="Cidade" ng-model="filters.cidade" ng-change="updateResults();getBairro();filters.bairro=''" ng-options="item.cidade as item.cidade for item in filters.cidades">
                     <option value="">Cidade</option>
                 </select>
                 <span class="input-group-btn">
@@ -142,7 +144,7 @@
 
       <div class="col-lg-12">
         <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" ng-disabled="result == 0">Pesquisar</button>
+            <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" ng-click="search()" ng-disabled="result == 0">Pesquisar</button>
         </div>
     </div>
     </div><!-- /.row -->
@@ -154,7 +156,7 @@
 <!-- container -->
 <div class="container">
 
-    <div class="well">
+    <div class="well" hidden>
         <div class="row">
             <form class="form-horizontal" role="form">
                 <div class="col-md-7">

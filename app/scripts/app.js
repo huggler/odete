@@ -80,7 +80,7 @@ angular
         parent: 'cadastro',
         url: '/odete',
         templateUrl: '/views/odete.html',
-        controller: 'OdeteCtrl'
+        controller: 'BagunceiroCtrl'
       })   
       .state('bagunceiro', {
         parent: 'cadastro',

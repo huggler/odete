@@ -9,8 +9,13 @@
  */
 var geocoder;
 
-angular.module('angularApp')
-  .controller('BagunceiroCtrl', function ($scope, $http) {
+var app = angular.module('angularApp');
+
+app.controller('ColaboradorCtrl', function($scope) {
+  $scope.user.tipo = 'COLABORADOR';
+});
+
+app.controller('BagunceiroCtrl', function ($scope, $http) {
 
     $scope.user = {};
     $scope.user.firstname = '';
@@ -41,7 +46,16 @@ angular.module('angularApp')
     $scope.user.banheiros = '';
 
     $scope.user.idfacebook = '';
-    $scope.success = '';    
+    $scope.success = '';
+    $scope.user.tipo = 'BAGUNCEIRO';
+
+    $scope.cacheOperadoras = [];
+
+    $scope.getOperadoras = function(){
+      $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar/operadoras').then(function(response){
+        $scope.cacheOperadoras = response.data;
+      });
+    };
 
     $scope.loginFacebook = function(){
       FB.getLoginStatus(function(response) {
@@ -78,7 +92,7 @@ angular.module('angularApp')
 
     $scope.save = function(){
 
-      var dataForm = form2js('formbagunceiro');
+      var dataForm = window.form2js('formbagunceiro');
 
       $http.get('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', { params : {
         data : dataForm
@@ -204,11 +218,17 @@ angular.module('angularApp')
             break;
          }
     };
+
+    $scope.getOperadoras();    
+
   }).directive('addTelefones', function() {
     return {
-      restrict: 'A',
-      transclude: true,
+      restrict: 'EA',
+      transclude: false,
       templateUrl: '/views/add-Telefones.html',
+      scope : {
+        operadoras : '='
+      },
       link: function () {
       }
     };

@@ -6,11 +6,7 @@
                 <span class="concept">Operadora</span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="#Tim">Tim</a></li>
-                <li><a href="#Vivo">Vivo</a></li>
-                <li><a href="#Nextel">Nextel</a></li>
-                <li><a href="#Oi">Oi</a></li>
-                <li><a href="#Claro">Claro</a></li>
+                <li scope="col" ng-repeat="operadora in operadoras"><a href="#{{operadora.id}}">{{operadora.txtOperadora}}</a></li>
             </ul>
             <input type="hidden" class="input-group-select-val operadora" name="telefones[0].operadora" value="Operadora">
         </div>
@@ -19,4 +15,4 @@
             <button type="button" class="btn btn-success btn-add">+</button>
         </span>
     </div>
-</div
+</div>

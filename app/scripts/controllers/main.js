@@ -42,7 +42,7 @@ angular.module('angularApp')
       });
     };
 
-    $scope.search();
+    //$scope.search();
 
     $scope.updateResults = function(){
       $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar', { params : { data : $scope.filters }}).then(function(data){
