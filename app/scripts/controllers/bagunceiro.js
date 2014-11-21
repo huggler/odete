@@ -44,8 +44,14 @@ app.controller('BagunceiroCtrl', ['$scope', '$http','UserService', function ($sc
     });
   }
 
+  $scope.loadingCep = false;
   $scope.save = BagunceiroServices.save;
-  $scope.getCep = BagunceiroServices.getCep;
+  $scope.getCep = function(obj){
+    $scope.loadingCep = true;
+    BagunceiroServices.getCep(function(){
+      $scope.loadingCep = false;
+    });
+  };
   $scope.getMarker = BagunceiroServices.getMarker;
   $scope.showPosition = BagunceiroServices.showPosition;
   $scope.showMap = BagunceiroServices.showMap;

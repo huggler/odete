@@ -60,10 +60,11 @@ app.service('UserService', [ '$http', function($http){
     user.firstname = response.first_name;
     user.lastname = response.last_name;
     user.email = response.email;
-
-    user.dia = parseInt(response.birthday.split('/')[1], 10);
-    user.mes = parseInt(response.birthday.split('/')[0], 10);
-    user.ano = parseInt(response.birthday.split('/')[2], 10);
+    if(response.birthday){
+      user.dia = parseInt(response.birthday.split('/')[1], 10);
+      user.mes = parseInt(response.birthday.split('/')[0], 10);
+      user.ano = parseInt(response.birthday.split('/')[2], 10);
+    }
 
     user.idfacebook = response.id;
 
@@ -80,12 +81,13 @@ app.service('UserService', [ '$http', function($http){
       callback(data.data);
     });
   };
-  var getCep = function(){
+  var getCep = function(callback){
     $http.get('http://cep.correiocontrol.com.br/'+ user.cep.replace(/\D/g, '') +'.json').success(function(data){
       user.cidade = data.localidade;
       user.endereco = data.logradouro;
       user.bairro = data.bairro;
       user.estado = data.uf;
+      callback();
     });
   };
 
