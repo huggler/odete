@@ -239,6 +239,54 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div ng-if="user.tipo == 'COLABORADOR'"> 
+                            <!-- Servicos -->
+                            <div class="col-lg-3 col-xs-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" ng-model="filters.faxinar" ng-change="updateResults()"/>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Faxinar">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-3 col-xs-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" ng-model="filters.passar" ng-change="updateResults()"/>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Passar">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-xs-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" ng-model="filters.data" ng-change="updateResults()"/>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Lavar">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-xs-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" ng-model="filters.cozinhar" ng-change="updateResults()"/>
+                                        </span>
+                                        <input type="text" class="form-control input-sm" placeholder="Cozinhar">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </fieldset>
                 </div>
                 <div class="panel-footer" hidden>Insira a quantidade de endereços que desejar.</div>
