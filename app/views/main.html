@@ -237,7 +237,7 @@
                   <div class="panel-body">
                         <div class="col-sm-6 col-md-3 col-xs-3 text-center">
                             <a href="" data-toggle="modal" data-target="#modalProfile">
-                                <img src="https://placeimg.com/200/200/people/{{item}}" title="visualizar perfil" alt="visualizar perfil" class="img-circle img-responsive" />
+                                <img src="http://graph.facebook.com/{{item.idfacebook}}/picture" title="visualizar perfil" alt="visualizar perfil" class="img-circle img-responsive" />
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-9 col-xs-9">
@@ -250,9 +250,9 @@
                                 </p>
     
                                 <h4>
-                                    {{item.price | currency:"R$"}}
+                                    {{item.valor | currency:"R$"}}
                                     <small>
-                                        Barra da Tijuca - RJ
+                                        {{item.bairro}} - {{item.uf}}
                                     </small>
                                 </h4>
 
