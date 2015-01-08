@@ -113,6 +113,10 @@ angular
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
+
+      $(".loginFacebook").hide();
+
+
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
@@ -120,6 +124,8 @@ angular
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
       document.getElementById('status').innerHTML = '';
+      $(".loginFacebook").show();
+
     }
   }
 
