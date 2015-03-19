@@ -12,11 +12,11 @@
         <small>{{result}} odete(s)</small>
         <span ng-show="filters.estado">
              em <span class="glyphicon glyphicon-map-marker"></span>
-            <a href="/pesquisar">
+            
                 <span ng-show="filters.estado">{{filters.estado}}</span>
                 <span ng-show="filters.cidade">- {{filters.cidade}}</span>
                 <span ng-show="filters.bairro">- {{filters.bairro}}</span>
-            </a>
+            
         </span>
         <small ng-hide="filters.estado">
             no site todo.
@@ -34,7 +34,7 @@
             <p class="text-center"></p>
         </div>
     </div>
-    <div class="row">
+    <div class="row hidden">
         <form class="form-filter">
             <legend hidden>Temos <strong>{{result}}</strong> odetes!</legend>
             <div class="col-lg-3 col-xs-6">
@@ -222,7 +222,7 @@
 
                     <h3 class="panel-title">
                         <strong>{{item.nome}}</strong>
-                        <small>28 anos</small>
+                        <small>{{item.sobrenome}}</small>
                                     <div hidden>
                                         <small>
                                             <i class="glyphicon glyphicon-eye-open  btn-xs" title="pessos acessaram"></i> (5)
@@ -243,10 +243,7 @@
                         <div class="col-sm-6 col-md-9 col-xs-9">
                             <div>
                                 <p class="skills">
-                                    <span class="label label-info">Lava</span>
-                                    <span class="label label-default">Passa</span>
-                                    <span class="label label-default">Cozinha</span>
-                                    <span class="label label-default">Faxina</span>
+                                    {{item.servicos}}
                                 </p>
     
                                 <h4>
@@ -256,7 +253,11 @@
                                     </small>
                                 </h4>
 
-                                <div class="btn-group">
+                                <ul>
+                                    <li ng-repeat="tel in item.telefone">{{tel}}</li>
+                                </ul>
+
+                                <div class="btn-group hidden">
                                     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">Contratar</button>
                                     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span><span class="sr-only">Social</span>
