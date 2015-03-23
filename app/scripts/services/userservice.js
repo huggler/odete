@@ -7,6 +7,7 @@
  * # UserService
  * Service in the angularApp.
  */
+var geocoder;
 var app = angular.module('angularApp');
 app.service('UserService', [ '$http', function($http){
   var user = {
@@ -68,16 +69,19 @@ app.service('UserService', [ '$http', function($http){
     user.idfacebook = response.id;
 
     user.gender = response.gender;
-    if(typeof callback == "function"){
+    if(typeof callback === 'function'){
       callback();
     }
   };
   var save = function(callback){
+      
     var dataForm = window.form2js('formbagunceiro');
     $http.get('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', { params : {
       data : dataForm
     }}).then(function(data){
-      callback(data.data);
+      if(callback){
+        callback(data);
+      }
     });
   };
   var getCep = function(){
@@ -122,7 +126,6 @@ app.service('UserService', [ '$http', function($http){
       pais : 'country'
     };
 
-    var that = this;
     geocoder.geocode({ 'latLng': latlng }, function (results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         if (results[1]) {
@@ -139,9 +142,9 @@ app.service('UserService', [ '$http', function($http){
             typeAdressList = address.types;
             typeAdressListLen = typeAdressList.length;
 
-            for (var b = 0; b < typeAdressListLen; b++) {
+            for (var y = 0; y < typeAdressListLen; y++) {
 
-              typeAdress = typeAdressList[b];
+              typeAdress = typeAdressList[y];
 
               if (typeAdress === objCep.numero) {
                 user.numero = address.short_name;
@@ -167,7 +170,9 @@ app.service('UserService', [ '$http', function($http){
             }
           }
           // $scope.$apply();
-          callback();
+          if(callback){
+            callback();
+          }
         }
       }
     });

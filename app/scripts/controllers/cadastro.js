@@ -8,7 +8,7 @@
  * Controller of the angularApp
  */
 angular.module('angularApp')
-  .controller('CadastroCtrl', function ($scope) {
+  .controller('CadastroCtrl', ['$scope',function ($scope) {
 
     $scope.loadRegister = function(type){
     	if(type === 'odete'){
@@ -17,8 +17,4 @@ angular.module('angularApp')
 			return 'views/xibata.html';
     	}
     };
-
-    $scope.save = function(){
-    };
-
-  });
+}]);
