@@ -57,19 +57,19 @@
             <div class="row">
                 <div class="col-xs-4 col-md-4">
                     <div class="form-group">
-                        <input type="number" name="dia" value="" required min="1" max="31" maxlength="2" class="form-control input-lg" ng-model="user.dia" placeholder="dd" />
+                        <input type="number" name="dia" value="" required min="1" max="31" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxlength="2" class="form-control input-lg" ng-model="user.dia" placeholder="dd" />
                         <label for="name">Dia</label>
                     </div>
                 </div>
                 <div class="col-xs-4 col-md-4">
                     <div class="form-group">
-                        <input type="number" name="mes" value="" required min="1" max="12" maxlength="2" class="form-control input-lg" ng-model="user.mes" placeholder="mm" />
+                        <input type="number" name="mes" value="" required min="1" max="12" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxlength="2" class="form-control input-lg" ng-model="user.mes" placeholder="mm" />
                         <label for="name">Mês</label>
                     </div>
                 </div>
                 <div class="col-xs-4 col-md-4">
                     <div class="form-group">
-                        <input type="number" name="ano" value="" required min="1900" maxlength="4" class="form-control input-lg" ng-model="user.ano" placeholder="aaaa" />
+                        <input type="number" name="ano" value="" required min="1900" maxlength="4" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="form-control input-lg" ng-model="user.ano" placeholder="aaaa" />
                         <label for="name">Ano</label>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
             </div>
 
             <!-- telefones -->
-            <div class="row" add-telefones operadoras="cacheOperadoras">
+            <div class="row" add-telefones operadoras="cacheOperadoras" fnphone="addPhone">
             </div>
 
             <!-- painel de endereco -->
@@ -116,7 +116,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
-                                    <input type="text" placeholder="Cep" name="cep" ng-model="user.cep" class="form-control">
+                                    <input type="text" placeholder="18800-000" name="cep" ng-model="user.cep" maxlength="9" class="form-control" ui-br-cep-mask/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="button">
                                             <span class="glyphicon glyphicon-search" ng-click="getCep()" title="Pesquisar Cep"></span>
@@ -192,50 +192,52 @@
 
                     <!-- minhas config -->
                     <fieldset>
-                        <legend>Configurações do local</legend>
+                        <legend>Preferências</legend>
                         
-                        <div class="col-md-3 col-xs-12">
-                            <div class="form-group">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-home"></span>
-                                    </span>
-                                    <input type="number" class="form-control input-sm" placeholder="Metragem" name="metragem" ng-model="user.metragem"/>
-                                    <span class="input-group-addon input-sm">m2</span>
+                        <div ng-if="user.tipo == 'BAGUNCEIRO'">
+                            <div class="col-md-3 col-xs-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-home"></span>
+                                        </span>
+                                        <input type="number" class="form-control input-sm" placeholder="Metragem" name="metragem" ng-model="user.metragem"/>
+                                        <span class="input-group-addon input-sm">m2</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-lg-3 col-xs-12">
-                            <div class="form-group">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-credit-card"></span>
-                                    </span>
-                                    <input type="number" class="form-control input-sm" placeholder="Pago até" name="valor" ng-model="user.valor"/>
-                                    <span class="input-group-addon input-sm">R$</span>
+                            <div class="col-lg-3 col-xs-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-credit-card"></span>
+                                        </span>
+                                        <input type="number" class="form-control input-sm" placeholder="Pago até" name="valor" ng-model="user.valor"/>
+                                        <span class="input-group-addon input-sm">R$</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-lg-3 col-xs-12">
-                            <div class="form-group">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-tag"></i>
-                                    </span>
-                                    <input type="number" class="form-control input-sm" placeholder="Qtde Quartos" name="quartos" ng-model="user.quartos"/>
+                            <div class="col-lg-3 col-xs-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-tag"></i>
+                                        </span>
+                                        <input type="number" class="form-control input-sm" placeholder="Qtde Quartos" name="quartos" ng-model="user.quartos"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-lg-3 col-xs-12">
-                            <div class="form-group">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-tags"></i>
-                                    </span>
-                                    <input type="number" class="form-control input-sm" placeholder="Qtde Banheiros" name="banheiros" ng-model="user.banheiros"/>
+                            <div class="col-lg-3 col-xs-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-tags"></i>
+                                        </span>
+                                        <input type="number" class="form-control input-sm" placeholder="Qtde Banheiros" name="banheiros" ng-model="user.banheiros"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -248,7 +250,7 @@
                                         <span class="input-group-addon">
                                             <input type="checkbox" ng-model="filters.faxinar" ng-change="updateResults()"/>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Faxinar">
+                                        <span class="form-control">Faxinar</span>
                                     </div>
                                 </div>
                             </div>
@@ -259,7 +261,7 @@
                                         <span class="input-group-addon">
                                             <input type="checkbox" ng-model="filters.passar" ng-change="updateResults()"/>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Passar">
+                                        <span class="form-control">Passar</span>
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +272,7 @@
                                         <span class="input-group-addon">
                                             <input type="checkbox" ng-model="filters.data" ng-change="updateResults()"/>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Lavar">
+                                        <span class="form-control">Lavar</span>
                                     </div>
                                 </div>
                             </div>
@@ -281,7 +283,7 @@
                                         <span class="input-group-addon">
                                             <input type="checkbox" ng-model="filters.cozinhar" ng-change="updateResults()"/>
                                         </span>
-                                        <input type="text" class="form-control input-sm" placeholder="Cozinhar">
+                                        <span class="form-control">Cozinhar</span>
                                     </div>
                                 </div>
                             </div>
@@ -300,3 +302,5 @@
         </form>          
     </div>
 </div> 
+
+<pre>{{user | json}}</pre>

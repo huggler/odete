@@ -10,9 +10,11 @@
             </ul>
             <input type="hidden" class="input-group-select-val operadora" name="telefones[0].operadora" value="Operadora">
         </div>
-        <input type="tel" name="telefones[0].numero" class="form-control numero"/>
+        <input type="tel" name="telefones[0].numero" class="form-control numero" placeholder="(xx) xxxxx-xxxx" maxlength="15" />
         <span class="input-group-btn">
             <button type="button" class="btn btn-success btn-add">+</button>
         </span>
     </div>
+
+    <button ng-click="fnphone()">add</button>
 </div>

@@ -33,7 +33,7 @@ app.controller('ColaboradorCtrl', ['$scope', 'UserService', '$location', functio
 
 }]);
 
-app.controller('BagunceiroCtrl', ['$scope', '$http','UserService','$location', function ($scope, $http, UserService, $location) {
+app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function ($scope, UserService, $location) {
   var BagunceiroServices = new UserService();
   $scope.user = BagunceiroServices.user;
   $scope.getOperadoras = BagunceiroServices.getOperadoras;
@@ -63,7 +63,12 @@ app.controller('BagunceiroCtrl', ['$scope', '$http','UserService','$location', f
 
   $scope.getOperadoras(function(data){
     $scope.cacheOperadoras = data;
-  });    
+  });
+
+  $scope.addPhone = function(){
+    $scope.user.telefones.push({ddd: 21, telefone: 333});
+  };
+
 
 }]);
 
@@ -73,7 +78,8 @@ app.directive('addTelefones', function() {
     transclude: false,
     templateUrl: '/views/add-Telefones.html',
     scope : {
-      operadoras : '='
+      operadoras : '=',
+      fnphone : '='
     },
     link: function () {
     }

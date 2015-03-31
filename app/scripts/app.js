@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'angular-loading-bar',
-    'restangular'
+    'restangular',
+    'ui.utils.masks'
   ])
   .controller('MainCtrl', function ($scope, $http, $timeout, cfpLoadingBar) {
 
@@ -233,8 +234,24 @@ $(document).ready(function(){
 });
 
 
-
-
+window.maxLengthCheck = function(obj) {
+  if (obj.value.length > obj.maxLength){
+    obj.value = obj.value.slice(0, obj.maxLength);
+  }
+};
+    
+window.isNumeric = function(evt) {
+  var theEvent = evt || window.event;
+  var key = theEvent.keyCode || theEvent.which;
+  key = String.fromCharCode (key);
+  var regex = /[0-9]|\./;
+  if ( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault){
+      theEvent.preventDefault();
+    }
+  }
+};
 
 
 window.fbAsyncInit = function() {

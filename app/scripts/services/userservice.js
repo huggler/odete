@@ -20,7 +20,7 @@ app.service('UserService', [ '$http', function($http){
     mes:'',
     ano:'',
     gender:'',
-    telefones:'',
+    telefones:[],
     cidade:'',
     estado:'',
     endereco:'',
@@ -73,23 +73,30 @@ app.service('UserService', [ '$http', function($http){
       callback();
     }
   };
-  var save = function(callback){
+  var save = function(data, callback){
       
-    var dataForm = window.form2js('formbagunceiro');
-    $http.get('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', { params : {
-      data : dataForm
-    }}).then(function(data){
+    $http.post('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', data).success(function(data){
       if(callback){
         callback(data);
       }
+    }).error(function(){
+      toastr.error('Erro ao cadastrar. Tente novamente');
     });
   };
   var getCep = function(){
+    var cep = user.cep.replace(/\D/g, '');
+    if(!cep || cep === ''){
+      toastr.error('Digite um cep');
+      return false;
+    }
+
     $http.get('http://cep.correiocontrol.com.br/'+ user.cep.replace(/\D/g, '') +'.json').success(function(data){
       user.cidade = data.localidade;
       user.endereco = data.logradouro;
       user.bairro = data.bairro;
       user.estado = data.uf;
+    }).error(function(){
+      toastr.error('Erro ao receber o cep. Tente novamente');
     });
   };
 
