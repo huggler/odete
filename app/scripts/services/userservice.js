@@ -80,13 +80,13 @@ app.service('UserService', [ '$http', function($http){
         callback(data);
       }
     }).error(function(){
-      toastr.error('Erro ao cadastrar. Tente novamente');
+      window.toastr.error('Erro ao cadastrar. Tente novamente');
     });
   };
   var getCep = function(){
     var cep = user.cep.replace(/\D/g, '');
     if(!cep || cep === ''){
-      toastr.error('Digite um cep');
+      window.toastr.error('Digite um cep');
       return false;
     }
 
@@ -96,7 +96,7 @@ app.service('UserService', [ '$http', function($http){
       user.bairro = data.bairro;
       user.estado = data.uf;
     }).error(function(){
-      toastr.error('Erro ao receber o cep. Tente novamente');
+      window.toastr.error('Erro ao receber o cep. Tente novamente');
     });
   };
 

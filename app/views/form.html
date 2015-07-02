@@ -101,8 +101,10 @@
             </div>
 
             <!-- telefones -->
-            <div class="row" add-telefones operadoras="cacheOperadoras" fnphone="addPhone">
+            <strong>Telefones:</strong>
+            <div class="row" add-telefones operadoras="cacheOperadoras" fnphone="addPhone" ng-repeat="telefone in user.telefones">
             </div>
+            <pre>{{user | json }}</pre>
 
             <!-- painel de endereco -->
             <div class="panel panel-default">

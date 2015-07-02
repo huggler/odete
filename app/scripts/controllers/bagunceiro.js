@@ -65,8 +65,10 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
     $scope.cacheOperadoras = data;
   });
 
+  $scope.user.telefones.push({ddd: 21, telefone: 333});
+
   $scope.addPhone = function(){
-    $scope.user.telefones.push({ddd: 21, telefone: 333});
+    $scope.user.telefones.push({ddd: 21, telefone: $scope.telefone});
   };
 
 
