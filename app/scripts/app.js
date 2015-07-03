@@ -37,7 +37,7 @@ angular
 
 
     $urlRouterProvider.otherwise('/');
-    $locationProvider.html5Mode(true).hashPrefix('!');
+    //$locationProvider.html5Mode(true).hashPrefix('!');
 
     $stateProvider
       .state('main', {

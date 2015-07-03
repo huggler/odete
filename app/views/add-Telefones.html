@@ -1,18 +1,20 @@
-<div class="col-md-12 multiple-form-group" data-max="3">
-    <strong>Telefones:</strong>
+<div class="col-md-12 multiple-form-group">
     <div class="form-group input-group input-group-lg">
         <div class="input-group-btn input-group-select">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <span class="concept">Operadora</span> <span class="caret"></span>
+                <span class="concept" ng-bind="operadoraName"></span> <span class="caret"></span>
             </button>
+
             <ul class="dropdown-menu" role="menu">
-                <li scope="col" ng-repeat="operadora in operadoras"><a href="#{{operadora.id}}">{{operadora.txtOperadora}}</a></li>
+                <li scope="col"><a href="javascript:void(0);" ng-click="item.operadora = ''; selectOperadora('Operadoras');">Operadoras</a></li>
+                <li scope="col" ng-repeat="operadora in operadoras"><a href="javascript:void(0);" ng-click="item.operadora = operadora.id; selectOperadora(operadora.txtOperadora);">{{operadora.txtOperadora}}</a></li>
             </ul>
-            <input type="hidden" class="input-group-select-val operadora" name="telefones[0].operadora" value="Operadora">
+            <input type="hidden" class="input-group-select-val operadora" value="Operadora">
         </div>
-        <input type="tel" name="telefones[0].numero" class="form-control numero"/>
+        <input type="text"  ng-model="item.telefone" class="form-control numero" placeholder="(xx) xxxxx-xxxx" maxlength="15" ui-br-phone-number />
         <span class="input-group-btn">
-            <button type="button" class="btn btn-success btn-add">+</button>
+            <button type="button" ng-if="item.add" class="btn btn-success" ng-click="fnphone('add', item)">+</button>
+            <button type="button" ng-if="!item.add" class="btn btn-danger" ng-click="fnphone('del', item)">-</button>
         </span>
     </div>
 </div>
