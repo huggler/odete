@@ -496,3 +496,16 @@ max-height: 100% !important;
 .navbar-header .navbar-toggle {
 	margin-left: 15px;
 }
+
+.brand {
+	color: #fff;
+	position: absolute;
+	top: 15px;
+	width: 145px;
+	left: 50px;
+}
+
+
+.fb_iframe_widget {display: block !important;}
+.fb_iframe_widget span {display: block !important; width: 100% !important}
+.fb_iframe_widget iframe {display: block !important; width: 100% !important; position: relative !important;}
