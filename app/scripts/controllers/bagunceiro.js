@@ -63,12 +63,6 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
 
   $scope.getOperadoras(function(data){
     $scope.cacheOperadoras = data;
-<<<<<<< e517806d77e2e74324a4b1bc40f2e4a09dbe9d1a
-=======
-<<<<<<< 59a0cbd055d7d8606fb0ea8586833060929c7b33
-  });    
-=======
->>>>>>> b107723ee2b5667207b5197b45849c2047e2ce7d
   });
 
   $scope.user.telefones.push({operadora: '', telefone: '', add: true});
@@ -89,15 +83,9 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
         $scope.user.telefones.splice(idx, 1);
         $scope.user.telefones[$scope.user.telefones.length - 1].add = true;
         break;
-<<<<<<< e517806d77e2e74324a4b1bc40f2e4a09dbe9d1a
     } 
   };
 
-=======
-    }
-  };
->>>>>>> 75bf5f5fd4d60b738eae5c100c65491dc650bb76
->>>>>>> b107723ee2b5667207b5197b45849c2047e2ce7d
 
 }]);
 
@@ -107,20 +95,10 @@ app.directive('addTelefones', function() {
     transclude: false,
     templateUrl: '/views/add-Telefones.html',
     scope : {
-<<<<<<< e517806d77e2e74324a4b1bc40f2e4a09dbe9d1a
-=======
-<<<<<<< 59a0cbd055d7d8606fb0ea8586833060929c7b33
-      operadoras : '='
-=======
->>>>>>> b107723ee2b5667207b5197b45849c2047e2ce7d
       operadoras : '=',
       operadoraName: '=?',
       fnphone : '=',
       item: '=telefone'
-<<<<<<< e517806d77e2e74324a4b1bc40f2e4a09dbe9d1a
-=======
->>>>>>> 75bf5f5fd4d60b738eae5c100c65491dc650bb76
->>>>>>> b107723ee2b5667207b5197b45849c2047e2ce7d
     },
     controller: function ($scope) {
       $scope.operadoraName = 'Operadoras';
