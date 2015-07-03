@@ -102,9 +102,8 @@
 
             <!-- telefones -->
             <strong>Telefones:</strong>
-            <div class="row" add-telefones operadoras="cacheOperadoras" fnphone="addPhone" ng-repeat="telefone in user.telefones">
+            <div class="row" add-telefones operadoras="cacheOperadoras" fnphone="managerPhones" ng-repeat="(operadora, telefone) in user.telefones" operadora="operadora" telefone="telefone">
             </div>
-            <pre>{{user | json }}</pre>
 
             <!-- painel de endereco -->
             <div class="panel panel-default">
@@ -303,6 +302,4 @@
             </div>
         </form>          
     </div>
-</div> 
-
-<pre>{{user | json}}</pre>
+</div>

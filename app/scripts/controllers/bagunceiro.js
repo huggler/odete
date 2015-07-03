@@ -65,10 +65,25 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
     $scope.cacheOperadoras = data;
   });
 
-  $scope.user.telefones.push({ddd: 21, telefone: 333});
+  $scope.user.telefones.push({operadora: '', telefone: '', add: true});
 
-  $scope.addPhone = function(){
-    $scope.user.telefones.push({ddd: 21, telefone: $scope.telefone});
+  $scope.managerPhones = function (action, item) {
+    switch(action){
+      case "add": 
+        item.add = false;
+        $scope.user.telefones.push({
+          operadora: '',
+          telefone: '',
+          add:($scope.user.telefones.length < 2 ? true : false )
+        });
+        break;
+      case "del":
+        var idx = $scope.user.telefones.indexOf(item);
+
+        $scope.user.telefones.splice(idx, 1);
+        $scope.user.telefones[$scope.user.telefones.length - 1].add = true;
+        break;
+    } 
   };
 
 
@@ -81,9 +96,15 @@ app.directive('addTelefones', function() {
     templateUrl: '/views/add-Telefones.html',
     scope : {
       operadoras : '=',
-      fnphone : '='
+      operadoraName: '=?',
+      fnphone : '=',
+      item: '=telefone'
     },
-    link: function () {
+    controller: function ($scope) {
+      $scope.operadoraName = 'Operadoras';
+      $scope.selectOperadora = function(name) {
+        $scope.operadoraName = name;
+      }
     }
   };
 });
