@@ -7,6 +7,7 @@
  * # UserService
  * Service in the angularApp.
  */
+var geocoder;
 var app = angular.module('angularApp');
 app.service('UserService', [ '$http', function($http){
   var user = {
@@ -19,7 +20,7 @@ app.service('UserService', [ '$http', function($http){
     mes:'',
     ano:'',
     gender:'',
-    telefones:'',
+    telefones:[],
     cidade:'',
     estado:'',
     endereco:'',
@@ -60,34 +61,42 @@ app.service('UserService', [ '$http', function($http){
     user.firstname = response.first_name;
     user.lastname = response.last_name;
     user.email = response.email;
-    if(response.birthday){
-      user.dia = parseInt(response.birthday.split('/')[1], 10);
-      user.mes = parseInt(response.birthday.split('/')[0], 10);
-      user.ano = parseInt(response.birthday.split('/')[2], 10);
-    }
+
+    user.dia = parseInt(response.birthday.split('/')[1], 10);
+    user.mes = parseInt(response.birthday.split('/')[0], 10);
+    user.ano = parseInt(response.birthday.split('/')[2], 10);
 
     user.idfacebook = response.id;
 
     user.gender = response.gender;
-    if(typeof callback == "function"){
+    if(typeof callback === 'function'){
       callback();
     }
   };
-  var save = function(callback){
-    var dataForm = window.form2js('formbagunceiro');
-    $http.get('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', { params : {
-      data : dataForm
-    }}).then(function(data){
-      callback(data.data);
+  var save = function(data, callback){
+      
+    $http.post('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', data).success(function(data){
+      if(callback){
+        callback(data);
+      }
+    }).error(function(){
+      window.toastr.error('Erro ao cadastrar. Tente novamente');
     });
   };
-  var getCep = function(callback){
+  var getCep = function(){
+    var cep = user.cep.replace(/\D/g, '');
+    if(!cep || cep === ''){
+      window.toastr.error('Digite um cep');
+      return false;
+    }
+
     $http.get('http://cep.correiocontrol.com.br/'+ user.cep.replace(/\D/g, '') +'.json').success(function(data){
       user.cidade = data.localidade;
       user.endereco = data.logradouro;
       user.bairro = data.bairro;
       user.estado = data.uf;
-      callback();
+    }).error(function(){
+      window.toastr.error('Erro ao receber o cep. Tente novamente');
     });
   };
 
@@ -124,7 +133,6 @@ app.service('UserService', [ '$http', function($http){
       pais : 'country'
     };
 
-    var that = this;
     geocoder.geocode({ 'latLng': latlng }, function (results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         if (results[1]) {
@@ -141,9 +149,9 @@ app.service('UserService', [ '$http', function($http){
             typeAdressList = address.types;
             typeAdressListLen = typeAdressList.length;
 
-            for (var b = 0; b < typeAdressListLen; b++) {
+            for (var y = 0; y < typeAdressListLen; y++) {
 
-              typeAdress = typeAdressList[b];
+              typeAdress = typeAdressList[y];
 
               if (typeAdress === objCep.numero) {
                 user.numero = address.short_name;
@@ -169,7 +177,9 @@ app.service('UserService', [ '$http', function($http){
             }
           }
           // $scope.$apply();
-          callback();
+          if(callback){
+            callback();
+          }
         }
       }
     });

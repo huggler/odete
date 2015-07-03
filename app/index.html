@@ -2,13 +2,21 @@
 <html class="no-js" ng-app="angularApp">
   <head>
     <meta charset="utf-8">
-    <title>odete.com</title>
-    <meta name="description" content="">
+    <title>Odete | Solução dos Bagunceiros</title>
+    <meta name="description" content="Odete.me | Conectando bagunceiros. Nossa missão é facilitar a sua vida!">
     <meta name="viewport" content="width=device-width">
+
+    <meta property="og:title" content="Odete" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.odete.me" />
+    <meta property="og:image" content="http://www.odete.me/img/logo.png" />
+    <meta property="og:site_name" content="Odete | Solução dos Bagunceiros" />
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/toastr/toastr.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -33,9 +41,9 @@
             <h4 class="modal-title" id="myModalLabel">Sobre</h4>
           </div>
           <div class="modal-body">
-            <p>Odete.com é a solução que veio para conectar profissionais de limpeza e pessoas que precisam de ajuda para o dia-a-dia.</p>
-            <p>Nossa missão é facilitar a sua vida, disponibilizando o cadastro de pessoas sérias, com maxima transparência e segurança.</p>
-            <p>Milhões de pessoas usam Odete.com para compartilhar uma experiência e dar referências umas as outras.</p>
+            <p>Odete é a solução que veio para conectar profissionais de limpeza há pessoas que precisam de ajuda para o dia-a-dia.</p>
+            <p>Nossa missão é facilitar a sua vida, disponibilizando o cadastro de pessoas com máxima transparência e segurança.</p>
+            <p>Queremos partilhar de uma experiência única e ser referência para milhões de pessoas.</p>
           </div>
         </div>
       </div>
@@ -48,28 +56,19 @@
         
 
         <div class="dropdown pull-right" id="status">
-            <a href="/login" ui-sref="login">Login</a>
         </div>
         <div class="navbar-header">
           
-          <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" data-target-2=".navbar-collapse-container">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          
-
           <div class="navbar-brand logotipo">
             <h1><a href="/"><i class="icon-odete header"></i></a></h1>
+            <div class="brand">Odete.me | Beta</div>
           </div>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-brand-centered">
           <ul class="nav navbar-nav pull-right">
-            <li ui-sref-active="active" id="menu-cadastro"><a href="/cadastro" ui-sref="cadastro">Cadastro</a></li>
-            
+            <li class="loginFacebook"><a href="#" id="btn-login-facebook">Login</a></li>
             <li>
                 <select id="css" hidden>
                     <option></option>
@@ -111,18 +110,22 @@
                     Todos os direitos reservados.
                 </div>
             </div>
+            <hr size="1"/>
+            <div class="fb-like" data-href="http://odete.me/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
         </div>
     </div>
     <div class="fb-root" id="fb-root"></div>
+    
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
+      ga('create', 'UA-60845433-1', 'auto');
+      ga('send', 'pageview');
+
     </script>
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
@@ -162,6 +165,10 @@
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/form2object/src/form2js.js"></script>
     <script src="bower_components/form2object/src/jquery.toObject.js"></script>
+    <script src="bower_components/toastr/toastr.js"></script>
+    <script src="bower_components/br-validations/releases/br-validations.js"></script>
+    <script src="bower_components/string-mask/src/string-mask.js"></script>
+    <script src="bower_components/angular-input-masks/angular-input-masks.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

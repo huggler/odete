@@ -7,11 +7,9 @@
  * # BagunceiroCtrl
  * Controller of the angularApp
  */
-var geocoder;
-
 var app = angular.module('angularApp');
 
-app.controller('ColaboradorCtrl', ['$scope', 'UserService', function($scope, UserService) {
+app.controller('ColaboradorCtrl', ['$scope', 'UserService', '$location', function($scope, UserService, $location) {
   var ColaboradorServices = new UserService();
   $scope.user = ColaboradorServices.user;
   $scope.getOperadoras = ColaboradorServices.getOperadoras;
@@ -19,12 +17,13 @@ app.controller('ColaboradorCtrl', ['$scope', 'UserService', function($scope, Use
     ColaboradorServices.loginFacebook(function(){
       $scope.$apply();
     });
-  }
+  };
   $scope.save = function(){
     ColaboradorServices.save(function(data){
       $scope.success = data;
+      $location.path('/');
     });
-  }
+  };
   $scope.getCep = ColaboradorServices.getCep;
   $scope.getMarker = ColaboradorServices.getMarker;
   $scope.showPosition = ColaboradorServices.showPosition;
@@ -34,7 +33,7 @@ app.controller('ColaboradorCtrl', ['$scope', 'UserService', function($scope, Use
 
 }]);
 
-app.controller('BagunceiroCtrl', ['$scope', '$http','UserService', function ($scope, $http, UserService) {
+app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function ($scope, UserService, $location) {
   var BagunceiroServices = new UserService();
   $scope.user = BagunceiroServices.user;
   $scope.getOperadoras = BagunceiroServices.getOperadoras;
@@ -42,16 +41,16 @@ app.controller('BagunceiroCtrl', ['$scope', '$http','UserService', function ($sc
     BagunceiroServices.loginFacebook(function(){
       $scope.$apply();
     });
-  }
+  };
 
-  $scope.loadingCep = false;
-  $scope.save = BagunceiroServices.save;
-  $scope.getCep = function(obj){
-    $scope.loadingCep = true;
-    BagunceiroServices.getCep(function(){
-      $scope.loadingCep = false;
+  $scope.save = function(){
+    BagunceiroServices.save(function(data){
+      $scope.success = data;
+      $location.path('/');
     });
   };
+
+  $scope.getCep = BagunceiroServices.getCep;
   $scope.getMarker = BagunceiroServices.getMarker;
   $scope.showPosition = BagunceiroServices.showPosition;
   $scope.showMap = BagunceiroServices.showMap;

@@ -1,7 +1,7 @@
 <div class="jumbotron text-center">
-  <h1><i class="icon-odete main"></i></br>odete.com</h1>
+  <h1><i class="icon-odete main"></i></br>odete</h1>
   <p class="lead">
-    a solução dos bagunceiros!
+    solução dos bagunceiros!
   </p>
   <a class="btn btn-lg btn-success" href="/cadastro">Cadastrar</a>
 </div>
@@ -12,11 +12,11 @@
         <small>{{result}} odete(s)</small>
         <span ng-show="filters.estado">
              em <span class="glyphicon glyphicon-map-marker"></span>
-            <a href="/pesquisar">
+            
                 <span ng-show="filters.estado">{{filters.estado}}</span>
                 <span ng-show="filters.cidade">- {{filters.cidade}}</span>
                 <span ng-show="filters.bairro">- {{filters.bairro}}</span>
-            </a>
+            
         </span>
         <small ng-hide="filters.estado">
             no site todo.
@@ -107,8 +107,8 @@
     <div class="row">
       <div class="col-lg-4">
         <div class="form-group">
-            <div class="input-group input-group-sm">
-                <select class="form-control input-sm" ng-model="filters.estado" ng-change="updateResults();filters.cidade='';filters.bairro='';getCidade();" ng-options="item.uf as item.uf for item in filters.estados">
+            <div class="input-group input-group-lg">
+                <select class="form-control input-lg" ng-model="filters.estado" ng-change="updateResults();filters.cidade='';filters.bairro='';getCidade();" ng-options="item.uf as item.uf for item in filters.estados">
                     <option value="">Estado</option>
                 </select>
                 <span class="input-group-btn">
@@ -119,7 +119,7 @@
       </div>
       <div class="col-lg-4">
         <div class="form-group">
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group-lg">
                 <select class="form-control" placeholder="Cidade" ng-model="filters.cidade" ng-change="updateResults();getBairro();filters.bairro=''" ng-options="item.cidade as item.cidade for item in filters.cidades">
                     <option value="">Cidade</option>
                 </select>
@@ -131,7 +131,7 @@
       </div><!-- /.col-lg-6 -->
       <div class="col-lg-4">
         <div class="form-group">
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group-lg">
                 <select class="form-control" placeholder="Bairro" ng-model="filters.bairro" ng-change="updateResults()" ng-options="item.bairro as item.bairro for item in filters.bairros">
                     <option value="">Bairro</option>
                 </select>
@@ -222,7 +222,7 @@
 
                     <h3 class="panel-title">
                         <strong>{{item.nome}}</strong>
-                        <small>28 anos</small>
+                        <small>{{item.sobrenome}}</small>
                                     <div hidden>
                                         <small>
                                             <i class="glyphicon glyphicon-eye-open  btn-xs" title="pessos acessaram"></i> (5)
@@ -237,26 +237,27 @@
                   <div class="panel-body">
                         <div class="col-sm-6 col-md-3 col-xs-3 text-center">
                             <a href="" data-toggle="modal" data-target="#modalProfile">
-                                <img src="https://placeimg.com/200/200/people/{{item}}" title="visualizar perfil" alt="visualizar perfil" class="img-circle img-responsive" />
+                                <img ng-src="http://graph.facebook.com/{{item.idfacebook}}/picture" title="visualizar perfil" alt="visualizar perfil" class="img-circle img-responsive" />
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-9 col-xs-9">
                             <div>
                                 <p class="skills">
-                                    <span class="label label-info">Lava</span>
-                                    <span class="label label-default">Passa</span>
-                                    <span class="label label-default">Cozinha</span>
-                                    <span class="label label-default">Faxina</span>
+                                    {{item.servicos}}
                                 </p>
     
                                 <h4>
-                                    {{item.price | currency:"R$"}}
+                                    {{item.valor | currency:"R$"}}
                                     <small>
-                                        Barra da Tijuca - RJ
+                                        {{item.bairro}} - {{item.uf}}
                                     </small>
                                 </h4>
 
-                                <div class="btn-group">
+                                <ul>
+                                    <li ng-repeat="tel in item.telefone">{{tel}}</li>
+                                </ul>
+
+                                <div class="btn-group hidden">
                                     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">Contratar</button>
                                     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span><span class="sr-only">Social</span>

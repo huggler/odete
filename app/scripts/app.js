@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'angular-loading-bar',
-    'restangular'
+    'restangular',
+    'ui.utils.masks'
   ])
   .controller('MainCtrl', function ($scope, $http, $timeout, cfpLoadingBar) {
 
@@ -100,7 +101,7 @@ angular
 
   function testAPI() {
     FB.api('/me', function(response) {
-      document.getElementById('status').innerHTML = '<a href="#" class="dropdown-toggle dropdown-perfil" data-toggle="dropdown">Olá, ' + response.first_name + '! <img src="http://graph.facebook.com/'+ response.id + '/picture"/ class="img-circle"/><b class="caret"></b></a><ul class="dropdown-menu"><li><a href="#"><i class="glyphicon glyphicon-user"></i> Meu Perfil</a></li><li><a href="#"><i class="glyphicon glyphicon-tasks"></i> Histórico</a></li><li><a href="/calendar"><i class="glyphicon glyphicon-calendar"></i> Agenda</a></li><li class="divider"></li><li><a href="#" class="btn-logout"><i class="glyphicon glyphicon-share-alt"></i> Sair</a></li></ul>';
+      document.getElementById('status').innerHTML = '<a href="#" class="dropdown-toggle dropdown-perfil" data-toggle="dropdown">Olá, ' + response.first_name + '! <img src="http://graph.facebook.com/'+ response.id + '/picture"/ class="img-circle"/><b class="caret"></b></a><ul class="dropdown-menu"><li class="hidden"><a href="#"><i class="glyphicon glyphicon-user"></i> Meu Perfil</a></li><li class="hidden"><a href="#"><i class="glyphicon glyphicon-tasks"></i> Histórico</a></li><li class="hidden"><a href="/calendar"><i class="glyphicon glyphicon-calendar"></i> Agenda</a></li><li class="divider"></li><li><a href="#" class="btn-logout"><i class="glyphicon glyphicon-share-alt"></i> Sair</a></li></ul>';
     });
   }
 
@@ -113,6 +114,10 @@ angular
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
+
+      $('.loginFacebook').hide();
+
+
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
@@ -120,6 +125,8 @@ angular
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
       document.getElementById('status').innerHTML = '';
+      $('.loginFacebook').show();
+
     }
   }
 
@@ -161,74 +168,29 @@ $(document).ready(function(){
       $('#css-default').attr('href', this.value);
   });
 
-  /* usado para adicionar novos campos de telefones */
-  var countFrm=0;
-  var addFormGroup = function (event) {
-      countFrm++;
-      event.preventDefault();
-
-      var $formGroup = $(this).closest('.form-group');
-      var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
-      var $formGroupClone = $formGroup.clone();
-
-      $(this)
-          .toggleClass('btn-success btn-add btn-danger btn-remove')
-          .html('–');
-
-      $formGroupClone.find('input').val('');
-      $formGroupClone.find('.operadora').attr('name', 'telefones['+ countFrm +'].operadora');
-      $formGroupClone.find('.numero').attr('name', 'telefones['+ countFrm +'].numero');
- 
-      $formGroupClone.find('.concept').text('Operadora');
-      $formGroupClone.insertAfter($formGroup);
-
-      var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
-      if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
-          $lastFormGroupLast.find('.btn-add').attr('disabled', true);
-      }
-  };
-
-  var removeFormGroup = function (event) {
-      event.preventDefault();
-
-      var $formGroup = $(this).closest('.form-group');
-      var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
-
-      var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
-      if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
-          $lastFormGroupLast.find('.btn-add').attr('disabled', false);
-      }
-
-      $formGroup.remove();
-  };
-
-  var selectFormGroup = function (event) {
-      event.preventDefault();
-
-      var $selectGroup = $(this).closest('.input-group-select');
-      var param = $(this).attr('href').replace('#','');
-      var concept = $(this).text();
-
-      $selectGroup.find('.concept').text(concept);
-      $selectGroup.find('.input-group-select-val').val(param);
-
-  };
-
-  var countFormGroup = function ($form) {
-      return $form.find('.form-group').length;
-  };
-
-  $(document).on('click', '.btn-add', addFormGroup);
-  $(document).on('click', '.btn-remove', removeFormGroup);
-  $(document).on('click', '.dropdown-menu a', selectFormGroup);
-
   $(document).on('click', '#btn-login-facebook', login);
   $(document).on('click', '.btn-logout', logout);
 });
 
 
-
-
+window.maxLengthCheck = function(obj) {
+  if (obj.value.length > obj.maxLength){
+    obj.value = obj.value.slice(0, obj.maxLength);
+  }
+};
+    
+window.isNumeric = function(evt) {
+  var theEvent = evt || window.event;
+  var key = theEvent.keyCode || theEvent.which;
+  key = String.fromCharCode (key);
+  var regex = /[0-9]|\./;
+  if ( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault){
+      theEvent.preventDefault();
+    }
+  }
+};
 
 
 window.fbAsyncInit = function() {
