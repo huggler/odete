@@ -243,51 +243,20 @@
                             </div>
                         </div>
 
-                        <div ng-if="user.tipo == 'COLABORADOR'"> 
+                        <div ng-if="user.tipo == 'COLABORADOR'">
+
                             <!-- Servicos -->
-                            <div class="col-lg-3 col-xs-12">
+                            <div class="col-lg-3 col-xs-12" ng-repeat="servico in cacheServicos">
                                 <div class="form-group">
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-addon">
-                                            <input type="checkbox" ng-model="filters.faxinar" ng-change="updateResults()"/>
+                                            <input type="checkbox" ng-checked="user.servicos.indexOf(servico) != -1" ng-click="toggleCheck(servico)" value="{{servico.id}}"/>
                                         </span>
-                                        <span class="form-control">Faxinar</span>
+                                        <span class="form-control">{{servico.txtServico}}</span>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="col-lg-3 col-xs-12">
-                                <div class="form-group">
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-addon">
-                                            <input type="checkbox" ng-model="filters.passar" ng-change="updateResults()"/>
-                                        </span>
-                                        <span class="form-control">Passar</span>
-                                    </div>
-                                </div>
-                            </div>
+                            </div>                            
 
-                            <div class="col-lg-3 col-xs-12">
-                                <div class="form-group">
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-addon">
-                                            <input type="checkbox" ng-model="filters.data" ng-change="updateResults()"/>
-                                        </span>
-                                        <span class="form-control">Lavar</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-xs-12">
-                                <div class="form-group">
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-addon">
-                                            <input type="checkbox" ng-model="filters.cozinhar" ng-change="updateResults()"/>
-                                        </span>
-                                        <span class="form-control">Cozinhar</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </fieldset>

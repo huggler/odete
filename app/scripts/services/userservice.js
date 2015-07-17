@@ -33,11 +33,19 @@ app.service('UserService', [ '$http', function($http){
     banheiros:'',
     idfacebook:'',
     tipo:'',
-    errorMsg: ''
+    errorMsg: '',
+    servicos:[]
   };
 
+  var urlApi = 'http://odete.me';
+
+  var getServicos = function(callback){
+    $http.get(urlApi + '/api/index.php/pesquisar/servicos').then(function(response){
+      callback(response.data);
+    });
+  };
   var getOperadoras = function(callback){
-    $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar/operadoras').then(function(response){
+    $http.get(urlApi + '/api/index.php/pesquisar/operadoras').then(function(response){
       callback(response.data);
     });
   };
@@ -75,7 +83,7 @@ app.service('UserService', [ '$http', function($http){
   };
   var save = function(data, callback){
       
-    $http.post('http://odete.felipehuggler.com/back/index.php/bagunceiro/cadastrar', data).success(function(data){
+    $http.post(urlApi + '/api/index.php/bagunceiro/cadastrar', data).success(function(data){
       if(callback){
         callback(data);
       }
@@ -203,6 +211,7 @@ app.service('UserService', [ '$http', function($http){
 
   return function () {
     this.getOperadoras = getOperadoras;
+    this.getServicos = getServicos;
     this.loginFacebook = loginFacebook;
     this.renderMe = renderMe;
     this.save = save;

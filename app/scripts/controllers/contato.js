@@ -17,7 +17,7 @@ angular.module('angularApp')
   	$scope.sendContact = function(){
 		$http({
 		        method  : 'POST',
-		        url     : 'back/index.php/contato',
+		        url     : 'api/index.php/contato',
 		        data    : $.param($scope.user),  // pass in data as strings
 		        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
 		    }).success(function() {

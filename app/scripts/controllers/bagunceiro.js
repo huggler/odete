@@ -10,20 +10,24 @@
 var app = angular.module('angularApp');
 
 app.controller('ColaboradorCtrl', ['$scope', 'UserService', '$location', function($scope, UserService, $location) {
+  
   var ColaboradorServices = new UserService();
+  
   $scope.user = ColaboradorServices.user;
   $scope.getOperadoras = ColaboradorServices.getOperadoras;
+  $scope.getServicos = ColaboradorServices.getServicos;
+  
   $scope.loginFacebook = function(){
     ColaboradorServices.loginFacebook(function(){
       $scope.$apply();
-    });
-  };
+    })};
   $scope.save = function(){
-    ColaboradorServices.save(function(data){
+
+    ColaboradorServices.save($scope.user, function(data){
       $scope.success = data;
       $location.path('/');
-    });
-  };
+    })};
+
   $scope.getCep = ColaboradorServices.getCep;
   $scope.getMarker = ColaboradorServices.getMarker;
   $scope.showPosition = ColaboradorServices.showPosition;
@@ -34,42 +38,56 @@ app.controller('ColaboradorCtrl', ['$scope', 'UserService', '$location', functio
 }]);
 
 app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function ($scope, UserService, $location) {
+  
   var BagunceiroServices = new UserService();
+  
   $scope.user = BagunceiroServices.user;
   $scope.getOperadoras = BagunceiroServices.getOperadoras;
+  $scope.getServicos = BagunceiroServices.getServicos;
+  
   $scope.loginFacebook = function(){
     BagunceiroServices.loginFacebook(function(){
       $scope.$apply();
-    });
-  };
-
+    })};
   $scope.save = function(){
-    BagunceiroServices.save(function(data){
+    BagunceiroServices.save($scope.user, function(data){
       $scope.success = data;
       $location.path('/');
-    });
-  };
+    })};
 
   $scope.getCep = BagunceiroServices.getCep;
   $scope.getMarker = BagunceiroServices.getMarker;
   $scope.showPosition = BagunceiroServices.showPosition;
   $scope.showMap = BagunceiroServices.showMap;
   $scope.showAddress = BagunceiroServices.showAddress;
-
   $scope.user.tipo = 'BAGUNCEIRO';
   $scope.success = '';
-
   $scope.cacheOperadoras = [];
+  $scope.cacheServicos = [];
+
+  $scope.toggleCheck = function (servico) {
+    if ($scope.user.servicos.indexOf(servico) === -1) {
+        $scope.user.servicos.push(servico);
+    } else {
+        $scope.user.servicos.splice($scope.user.servicos.indexOf(servico), 1);
+    }
+  };
+
 
   $scope.getOperadoras(function(data){
     $scope.cacheOperadoras = data;
   });
 
+  $scope.getServicos(function(data){
+    $scope.cacheServicos = data;
+  });
+
+  $scope.user.telefones = [];
   $scope.user.telefones.push({operadora: '', telefone: '', add: true});
 
   $scope.managerPhones = function (action, item) {
     switch(action){
-      case "add": 
+      case 'add': 
         item.add = false;
         $scope.user.telefones.push({
           operadora: '',
@@ -77,7 +95,7 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
           add:($scope.user.telefones.length < 2 ? true : false )
         });
         break;
-      case "del":
+      case 'del':
         var idx = $scope.user.telefones.indexOf(item);
 
         $scope.user.telefones.splice(idx, 1);
@@ -104,7 +122,7 @@ app.directive('addTelefones', function() {
       $scope.operadoraName = 'Operadoras';
       $scope.selectOperadora = function(name) {
         $scope.operadoraName = name;
-      }
+      };
     }
   };
 });

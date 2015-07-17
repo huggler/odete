@@ -99,6 +99,20 @@ angular
     $rootScope.$stateParams = $stateParams;
 });
 
+angular.module('angularApp').filter('tel', function() {
+  return function(input) {
+    var str = input+ '';
+        str = str.replace(/\D/g,'');
+        if(str.length === 11 ){
+        str=str.replace(/^(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
+      }else{
+      str=str.replace(/^(\d{2})(\d{4})(\d{4})/,'($1) $2-$3');
+      }
+    return str;
+  };
+});
+
+
   function testAPI() {
     FB.api('/me', function(response) {
       document.getElementById('status').innerHTML = '<a href="#" class="dropdown-toggle dropdown-perfil" data-toggle="dropdown">Olá, ' + response.first_name + '! <img src="http://graph.facebook.com/'+ response.id + '/picture"/ class="img-circle"/><b class="caret"></b></a><ul class="dropdown-menu"><li class="hidden"><a href="#"><i class="glyphicon glyphicon-user"></i> Meu Perfil</a></li><li class="hidden"><a href="#"><i class="glyphicon glyphicon-tasks"></i> Histórico</a></li><li class="hidden"><a href="/calendar"><i class="glyphicon glyphicon-calendar"></i> Agenda</a></li><li class="divider"></li><li><a href="#" class="btn-logout"><i class="glyphicon glyphicon-share-alt"></i> Sair</a></li></ul>';

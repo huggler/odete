@@ -256,7 +256,14 @@
                         <div class="col-sm-6 col-md-9 col-xs-9">
                             <div>
                                 <p class="skills">
-                                    {{item.servicos}}
+                                <ul class="nav nav-pills">
+
+
+                                    <li ng-repeat="servico in item.servico track by $index">
+                                        <span class="label label-info">{{servico}}</span>
+                                    </li>
+                                </ul>
+
                                 </p>
     
                                 <h4>
@@ -266,8 +273,8 @@
                                     </small>
                                 </h4>
 
-                                <ul>
-                                    <li ng-repeat="tel in item.telefone">{{tel}}</li>
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li ng-repeat="telefone in item.telefone track by $index">{{item.operadora[$index]}} - {{telefone | tel}}</li>
                                 </ul>
 
                                 <div class="btn-group hidden">

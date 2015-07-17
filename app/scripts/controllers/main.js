@@ -36,8 +36,10 @@ angular.module('angularApp')
 
     $scope.total = filters.someMethod();
 
+    var apiUrl = 'http://odete.me/';
+
     $scope.search = function(){
-      $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar/colaboradores', { params : { data : $scope.filters }}).then(function(data){
+      $http.get(apiUrl + 'api/index.php/pesquisar/colaboradores', { params : { data : $scope.filters }}).then(function(data){
         $scope.data = data.data;
       });
     };
@@ -45,13 +47,13 @@ angular.module('angularApp')
     //$scope.search();
 
     $scope.updateResults = function(){
-      $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar', { params : { data : $scope.filters }}).then(function(data){
+      $http.get(apiUrl + 'api/index.php/pesquisar', { params : { data : $scope.filters }}).then(function(data){
         $scope.result = data.data;
       });
     };
 
     $scope.getEstado = function(){
-      $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar/estado', { params : { data : $scope.filters }}).then(function(data){
+      $http.get(apiUrl + 'api/index.php/pesquisar/estado', { params : { data : $scope.filters }}).then(function(data){
         $scope.filters.estados = data.data;
       });
     };
@@ -65,7 +67,7 @@ angular.module('angularApp')
     };
 
     $scope.getCidade = function(){
-      $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar/cidade', { params : { data : $scope.filters }}).then(function(data){
+      $http.get(apiUrl + 'api/index.php/pesquisar/cidade', { params : { data : $scope.filters }}).then(function(data){
         $scope.filters.cidades = data.data;
       });
     };
@@ -76,7 +78,7 @@ angular.module('angularApp')
     };
 
     $scope.getBairro = function(){
-      $http.get('http://odete.felipehuggler.com/back/index.php/pesquisar/bairro', { params : { data : $scope.filters }}).then(function(data){
+      $http.get(apiUrl + 'api/index.php/pesquisar/bairro', { params : { data : $scope.filters }}).then(function(data){
         $scope.filters.bairros = data.data;
       });
     };
