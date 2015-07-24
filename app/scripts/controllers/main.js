@@ -8,19 +8,16 @@
  * Controller of the angularApp
  */
 var geocoder;
-
 angular.module('angularApp')
-  .controller('MainCtrl', function ($scope, $http, filters) {
+  .controller('MainCtrl', function ($scope, $http, filters, UserService) {
 
-  	$scope.result = 0;
+    $scope.user = UserService.user;
+
     $scope.filters = {};
-    $scope.filters.faxinar = false;
-    $scope.filters.passar = false;
-    $scope.filters.lavar = false;
-    $scope.filters.cozinhar = false;
+    $scope.filters.servicos = $scope.user.servicos;
 
-    $scope.filters.data = new Date();
-    $scope.filters.periodo = '';
+    $scope.filters.latitude = '';
+    $scope.filters.longitude = '';
 
     $scope.filters.estado = '';
     $scope.filters.cidade = '';
@@ -32,19 +29,15 @@ angular.module('angularApp')
 
     $scope.quantity = 9;
     $scope.orderProp = '';
-    //$scope.result = filters.someMethod();
 
-    $scope.total = filters.someMethod();
+    $scope.endereco = '';
+
+    UserService.getServicos(function(data){
+      $scope.cacheServicos = data;
+    });
+
 
     var apiUrl = 'http://odete.me/';
-
-    $scope.search = function(){
-      $http.get(apiUrl + 'api/index.php/pesquisar/colaboradores', { params : { data : $scope.filters }}).then(function(data){
-        $scope.data = data.data;
-      });
-    };
-
-    //$scope.search();
 
     $scope.updateResults = function(){
       $http.get(apiUrl + 'api/index.php/pesquisar', { params : { data : $scope.filters }}).then(function(data){
@@ -52,6 +45,7 @@ angular.module('angularApp')
       });
     };
 
+    /* recupera o total de odetes por estado */
     $scope.getEstado = function(){
       $http.get(apiUrl + 'api/index.php/pesquisar/estado', { params : { data : $scope.filters }}).then(function(data){
         $scope.filters.estados = data.data;
@@ -66,6 +60,7 @@ angular.module('angularApp')
       $scope.updateResults();
     };
 
+    /* recupera o total de odetes por cidade */
     $scope.getCidade = function(){
       $http.get(apiUrl + 'api/index.php/pesquisar/cidade', { params : { data : $scope.filters }}).then(function(data){
         $scope.filters.cidades = data.data;
@@ -77,6 +72,7 @@ angular.module('angularApp')
       $scope.clearBairro();
     };
 
+    /* recupera o total de odetes por bairro */
     $scope.getBairro = function(){
       $http.get(apiUrl + 'api/index.php/pesquisar/bairro', { params : { data : $scope.filters }}).then(function(data){
         $scope.filters.bairros = data.data;
@@ -87,111 +83,50 @@ angular.module('angularApp')
       $scope.filters.bairro = '';
     };
 
-   $scope.getMarker = function(){
-      if (navigator.geolocation) {
-          geocoder = new google.maps.Geocoder();
-          navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.handleError);
-      }else{
-            $scope.getEstado();
-            $scope.getCidade();
-            $scope.getBairro();
-            $scope.updateResults();
-          }
-    };
 
-    $scope.showPosition = function(position) {
-        $scope.showAddress(position);
-    };
+    /* faz a pesquisa baseada no cep ou na geolocation do usuário */
+    $scope.findMarker = function(cep){
 
-    $scope.showAddress = function(position){
-        var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      var callback = $scope.showAddress;
 
-        var location = {
-          numero : 'street_number',
-          cidade : 'locality',
-          endereco : 'route',
-          zip : 'postal_code',
-          estado : 'administrative_area_level_1',
-          bairro : 'neighborhood',
-          pais : 'country'
-        };
- 
-        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-            
-            if (status === google.maps.GeocoderStatus.OK) {
-                
-                if (results[1]) {
-
-                  var addressList = results[0].address_components;
-                  var addressListLen = addressList.length;
-                  var address = '';
-                  var typeAdressList = '';
-                  var typeAdressListLen = '';
-                  var typeAdress = '';
-
-                    for (var i = 0; i < addressListLen; i++) {
-
-                      address = addressList[i];
-                      typeAdressList = address.types;
-                      typeAdressListLen = typeAdressList.length;
-
-                        for (var b = 0; b < typeAdressListLen; b++) {
-
-                          typeAdress = typeAdressList[b];
-
-                            if (typeAdress === location.numero) {
-                                location.numero = address.short_name;
-                            }
-                            if (typeAdress === location.cidade) {
-                                $scope.filters.cidade = address.short_name;
-                            }
-                            if (typeAdress === location.endereco) {
-                                location.endereco = address.short_name;
-                            }
-                            if (typeAdress === location.zip) {
-                                location.zip = address.short_name;
-                            }
-                            if (typeAdress === location.estado) {
-                                $scope.filters.estado = address.short_name;
-                            }
-                            if (typeAdress === location.bairro) {
-                                $scope.filters.bairro = address.short_name;
-                            }
-                            if (typeAdress === location.pais) {
-                                location.pais = address.short_name;
-                            }
-                         }
-                     }
-
-                    $scope.$apply();
-
-                    $scope.getEstado();
-                    $scope.getCidade();
-                    $scope.getBairro();
-
-                    $scope.updateResults();
-                 }
-            }
+      if(cep){
+        UserService.getCepbyGoogle(cep, function(resp){
+          callback(resp[0]);
         });
+      }else{
+        UserService.getMarker(function(resp){
+          callback(resp[0]);
+        });        
+      }
     };
- 
-    $scope.handleError = function(error) {
-        switch(error.code){
-            case error.PERMISSION_DENIED:
-                $scope.errorMsg = ('Usuário negou o pedido de Geolocalização.');
-            break;
-            case error.POSITION_UNAVAILABLE:
-                $scope.errorMsg = ('Informações sobre a localização está indisponível.');
-            break;
-            case error.TIMEOUT:
-                $scope.errorMsg = ('O pedido para obter a localização do usuário expirou.');
-            break;
-            case error.UNKNOWN_ERROR:
-                $scope.errorMsg = ('Ocorreu um erro desconhecido.');
-            break;
-         }
-    }; 
+
+    /* printa o resultado e chama a pesquisa */
+    $scope.showAddress = function(resp){
+
+      var geolocation = resp.geometry.location;
+
+      $scope.filters.latitude = geolocation.A;
+      $scope.filters.longitude = geolocation.F;
+
+      $scope.endereco = resp.formatted_address;
+
+      $scope.$apply();
+
+      $scope.search();
+    };
 
 
-    $scope.getMarker();
+    $scope.search = function(){
+      $http.get(apiUrl + 'api/index.php/pesquisar/colaboradores', { params : { data : $scope.filters }}).then(function(data){
+        $scope.data = data.data;
+      });
+    };
+
+    $scope.toggleCheck = function (servico) {
+      if ($scope.user.servicos.indexOf(servico) === -1) {
+          $scope.user.servicos.push(servico);
+      } else {
+          $scope.user.servicos.splice($scope.user.servicos.indexOf(servico), 1);
+      }
+    };
   });

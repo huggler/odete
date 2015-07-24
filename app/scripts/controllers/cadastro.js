@@ -8,13 +8,4 @@
  * Controller of the angularApp
  */
 angular.module('angularApp')
-  .controller('CadastroCtrl', ['$scope',function ($scope) {
-
-    $scope.loadRegister = function(type){
-    	if(type === 'odete'){
-    		return 'views/bagunceiro.html';
-    	}else if (type === 'bagunceiro'){
-			return 'views/xibata.html';
-    	}
-    };
-}]);
+  .controller('CadastroCtrl', ['$scope',function ($scope) {}]);

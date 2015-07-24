@@ -6,7 +6,7 @@
 
             <legend>
                 <div class="form-group">
-                    <a href="#" ng-click="loginFacebook()" class="btn btn-lg btn-block btn-primary"><i class="fa fa-facebook"></i> cadastrar usando facebook</a>
+                    <a href="#" ng-click="loginFb()" class="btn btn-lg btn-block btn-primary"><i class="fa fa-facebook"></i> cadastrar usando facebook</a>
                 </div>
             </legend>
 
@@ -108,7 +108,7 @@
             <!-- painel de endereco -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Detalhes do meu endereço</h3>
+                    <h3 class="panel-title">Endereço</h3>
                 </div>
                 <div class="panel-body">
                     <!-- endereco -->
@@ -117,13 +117,13 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
-                                    <input type="text" placeholder="18800-000" name="cep" ng-model="user.cep" maxlength="9" class="form-control" ui-br-cep-mask/>
+                                    <input type="text" ng-blur="getCepbyGoogle(user.cep)" placeholder="18800-000" name="cep" ng-model="user.cep" maxlength="9" class="form-control" ui-br-cep-mask/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="button">
-                                            <span class="glyphicon glyphicon-search" ng-click="getCep()" title="Pesquisar Cep"></span>
+                                            <span class="glyphicon glyphicon-search" ng-click="getCepbyGoogle(user.cep)" title="Pesquisar Cep"></span>
                                         </button>
                                         <button class="btn btn-default" type="button">
-                                            <span class="glyphicon glyphicon-map-marker" ng-click="getMarker()" title="Usar posição atual"></span>
+                                            <span class="glyphicon glyphicon-map-marker" ng-click="getmyMarker()" title="Usar posição atual"></span>
                                         </button>
                                     </span>
                                 </div>
@@ -193,57 +193,24 @@
 
                     <!-- minhas config -->
                     <fieldset>
-                        <legend>Preferências</legend>
                         
-                        <div ng-if="user.tipo == 'BAGUNCEIRO'">
-                            <div class="col-md-3 col-xs-12">
-                                <div class="form-group">
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-home"></span>
-                                        </span>
-                                        <input type="number" class="form-control input-sm" placeholder="Metragem" name="metragem" ng-model="user.metragem"/>
-                                        <span class="input-group-addon input-sm">m2</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <legend>Valor # {{user.placeholderValor}}</legend>
 
-                            <div class="col-lg-3 col-xs-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-credit-card"></span>
                                         </span>
-                                        <input type="number" class="form-control input-sm" placeholder="Pago até" name="valor" ng-model="user.valor"/>
+                                        <input type="number" class="form-control input-sm" placeholder="120" name="valor" ng-model="user.valor"/>
                                         <span class="input-group-addon input-sm">R$</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-xs-12">
-                                <div class="form-group">
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-tag"></i>
-                                        </span>
-                                        <input type="number" class="form-control input-sm" placeholder="Qtde Quartos" name="quartos" ng-model="user.quartos"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-xs-12">
-                                <div class="form-group">
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-tags"></i>
-                                        </span>
-                                        <input type="number" class="form-control input-sm" placeholder="Qtde Banheiros" name="banheiros" ng-model="user.banheiros"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div ng-if="user.tipo == 'COLABORADOR'">
+                        <legend>Meus serviços - Marque os serviços que você realiza.</legend>
 
                             <!-- Servicos -->
                             <div class="col-lg-3 col-xs-12" ng-repeat="servico in cacheServicos">
@@ -261,13 +228,12 @@
 
                     </fieldset>
                 </div>
-                <div class="panel-footer" hidden>Insira a quantidade de endereços que desejar.</div>
             </div>
 
             <!-- botoes de acao -->
             <div class="form-group">
                 <button class="btn btn-lg btn-success btn-block" type="submit" ng-show="success != ''">Conta criada com sucesso</button>
-                <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" ng-hide="success != ''" ng-disabled="formbagunceiro.$invalid" ng-click="save()">Criar minha conta</button>
+                <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" ng-hide="success != ''" ng-disabled="formbagunceiro.$invalid" ng-click="register()">Criar minha conta</button>
             </div>
         </form>          
     </div>

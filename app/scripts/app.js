@@ -46,7 +46,6 @@ angular
         templateUrl: '/views/main.html',
         controller: 'MainCtrl'
       })
-   
       .state('calendar', {
         url: '/calendar',
         templateUrl: '/views/calendar.html',
@@ -61,16 +60,6 @@ angular
         url: '/contato',
         templateUrl: '/views/contato.html',
         controller: 'ContatoCtrl'
-      })
-      .state('servicos', {
-        url: '/servicos',
-        templateUrl: '/views/servicos.html',
-        controller: 'ServicosCtrl'
-      })
-      .state('login', {
-        url: '/login',
-        templateUrl: 'views/login.html',
-        controller: 'LoginCtrl'
       })
       .state('cadastro', {
         url: '/cadastro',
@@ -88,11 +77,6 @@ angular
         url: '/bagunceiro',
         templateUrl: '/views/bagunceiro.html',
         controller: 'BagunceiroCtrl'
-      })
-      .state('pesquisar', {
-        url: '/pesquisar',
-        templateUrl: '/views/pesquisar.html',
-        controller: 'PesquisarCtrl'
       });
   }).run(function($rootScope,$state,$stateParams){
     $rootScope.$state = $state;
@@ -112,6 +96,15 @@ angular.module('angularApp').filter('tel', function() {
   };
 });
 
+
+angular.module('angularApp').filter('cep', function() {
+  return function(input) {
+    var str = input+ '';
+        str = str.replace(/\D/g,'');
+        str=str.replace(/^(\d{2})(\d{3})(\d)/,'$1.$2-$3');
+    return str;
+  };
+});
 
   function testAPI() {
     FB.api('/me', function(response) {
