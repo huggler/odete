@@ -86,7 +86,7 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
 
     UserService.save(user, function(data){
       $scope.success = data;
-      $location.path('/');
+      window.toastr.success('Conta criada com sucesso', 'Cadastro');
     });
   };
 

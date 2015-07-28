@@ -233,7 +233,17 @@
 
             <!-- botoes de acao -->
             <div class="form-group">
-                <button class="btn btn-lg btn-success btn-block" type="submit" ng-show="success != ''">Conta criada com sucesso</button>
+
+
+            <div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != ''">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4>Conta criada com sucesso!</h4>
+              <p>Agora é só aguardar para ser contratada. Milhares de pessoas irão entrar em contato com você!!!</p>
+            </div>
+
+
+
+
                 <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" ng-hide="success != ''" ng-disabled="formbagunceiro.$invalid" ng-click="register()">Criar minha conta</button>
             </div>
         </form>          
