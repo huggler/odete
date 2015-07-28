@@ -6,7 +6,7 @@
 
             <legend>
                 <div class="form-group">
-                    <a href="#" ng-click="loginFb()" class="btn btn-lg btn-block btn-primary"><i class="fa fa-facebook"></i> cadastrar usando facebook</a>
+                    <a href="#" ng-click="loginFb()" class="btn btn-lg btn-block btn-primary"><i class="fa fa-facebook"></i> cadastrar usando meu facebook</a>
                 </div>
             </legend>
 
@@ -15,13 +15,13 @@
                 <div class="col-xs-6 col-md-6 col-xs-12">
                     <div class="form-group">
                         <input type="text" name="firstname" value="" class="form-control input-lg" placeholder="Nome" ng-model="user.firstname" required />
-                        <label for="name">Nome</label>
+                        <label for="name" class="lbl-focus">Nome</label>
                     </div>
                 </div>
                 <div class="col-xs-6 col-md-6 col-xs-12">
                     <div class="form-group">
                         <input type="text" name="lastname" value="" class="form-control input-lg" placeholder="SobreNome" ng-model="user.lastname" required />
-                        <label for="name">SobreNome</label>
+                        <label for="name" class="lbl-focus">SobreNome</label>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <input type="email" name="email" value="" class="form-control input-lg" placeholder="E-mail" ng-model="user.email" required />
-                        <label for="name">E-mail</label>
+                        <label for="name" class="lbl-focus">E-mail</label>
                     </div>
                 </div>
             </div>
@@ -41,13 +41,13 @@
                 <div class="col-xs-6 col-md-6">
                     <div class="form-group">
                         <input type="password" name="senha" value="" class="form-control input-lg" ng-model="user.senha" placeholder="Senha" required />
-                        <label for="name">Senha</label>
+                        <label for="name" class="lbl-focus">Senha</label>
                     </div>
                 </div>
                 <div class="col-xs-6 col-md-6">
                     <div class="form-group">
                         <input type="password" name="confirmsenha" value="" class="form-control input-lg" ng-model="user.confirmsenha" placeholder="Confirme a senha" required  />
-                        <label for="name">Confirme a senha</label>
+                        <label for="name" class="lbl-focus">Confirme a senha</label>
                     </div>
                 </div>
             </div>
@@ -58,19 +58,19 @@
                 <div class="col-xs-4 col-md-4">
                     <div class="form-group">
                         <input type="number" name="dia" value="" required min="1" max="31" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxlength="2" class="form-control input-lg" ng-model="user.dia" placeholder="dd" />
-                        <label for="name">Dia</label>
+                        <label for="name" class="lbl-focus">Dia</label>
                     </div>
                 </div>
                 <div class="col-xs-4 col-md-4">
                     <div class="form-group">
                         <input type="number" name="mes" value="" required min="1" max="12" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxlength="2" class="form-control input-lg" ng-model="user.mes" placeholder="mm" />
-                        <label for="name">Mês</label>
+                        <label for="name" class="lbl-focus">Mês</label>
                     </div>
                 </div>
                 <div class="col-xs-4 col-md-4">
                     <div class="form-group">
                         <input type="number" name="ano" value="" required min="1900" maxlength="4" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="form-control input-lg" ng-model="user.ano" placeholder="aaaa" />
-                        <label for="name">Ano</label>
+                        <label for="name" class="lbl-focus">Ano</label>
                     </div>
                 </div>
             </div>
@@ -78,26 +78,27 @@
             <!-- sexo -->
             <strong>Sexo:</strong>
             <div class="row">
-                <div class="col-lg-6">
+                <label class="col-lg-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                                <span class="input-group-addon">
+                                    <input type="radio" name="gender" id="female" value="female" ng-model="user.gender" ng-checked="user.gender == 'female'">
+                                </span>
+                                <span class="form-control" for="female">Feminino</span>
+                           
+                        </div>
+                    </div>
+                </label>
+                <label class="col-lg-6">
                     <div class="form-group">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon">
-                                <input type="radio" name="gender" value="female" ng-model="user.gender" ng-checked="user.gender == 'female'">
+                                <input type="radio" name="gender" id="male" value="male" ng-model="user.gender" ng-checked="user.gender == 'male'">
                             </span>
-                            <input type="text" class="form-control" placeholder="Feminino">
+                            <span class="form-control" for="male">Masculino</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon">
-                                <input type="radio" name="gender" value="male" ng-model="user.gender" ng-checked="user.gender == 'male'">
-                            </span>
-                            <input type="text" class="form-control" placeholder="Masculino">
-                        </div>
-                    </div>
-                </div>
+                </label>
             </div>
 
             <!-- telefones -->
@@ -132,13 +133,13 @@
                         <div class="col-sm-7">
                             <div class="form-group">
                                 <input type="text" placeholder="Endereço" ng-model="user.endereco" name="endereco" class="form-control input-lg">
-                                <label for="name">Endereco</label>
+                                <label for="name" class="lbl-focus">Endereco</label>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <input type="text" placeholder="Numero" ng-model="user.numero" name="numero" class="form-control input-lg">
-                                <label for="name">Numero</label>
+                                <label for="name" class="lbl-focus">Numero</label>
                             </div>
                         </div>
 
@@ -180,13 +181,13 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <input type="text" placeholder="Cidade" ng-model="user.cidade" name="cidade" class="form-control input-lg"required>
-                                <label for="name">Cidade</label>
+                                <label for="name" class="lbl-focus">Cidade</label>
                             </div>
                         </div>
                         <div class="col-sm-5">
                             <div class="form-group">
                                 <input type="text" placeholder="Bairro" ng-model="user.bairro" name="bairro" class="form-control input-lg" required>
-                                <label for="name">Bairro</label>
+                                <label for="name" class="lbl-focus">Bairro</label>
                             </div>
                         </div>
                     </fieldset>
@@ -213,7 +214,7 @@
                         <legend>Meus serviços - Marque os serviços que você realiza.</legend>
 
                             <!-- Servicos -->
-                            <div class="col-lg-3 col-xs-12" ng-repeat="servico in cacheServicos">
+                            <label class="col-lg-3 col-xs-12" ng-repeat="servico in cacheServicos">
                                 <div class="form-group">
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-addon">
@@ -222,7 +223,7 @@
                                         <span class="form-control">{{servico.txtServico}}</span>
                                     </div>
                                 </div>
-                            </div>                            
+                            </label>                            
 
                         </div>
 
