@@ -27,6 +27,7 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
   $scope.user = UserService.user;
   $scope.user.placeholderValor = 'Pago até - Insira o valor que você acha justo pagar pelos serviços.';
 
+  $scope.submited = false;
   
   /* faz o login no facebook */
   $scope.loginFb = function(){
@@ -54,40 +55,63 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
 
   };
 
+
+  $scope.validate = function(){
+
+    var user = $scope.user;
+
+    if(user.firstname === ''){
+      window.toastr.error('Digite seu Nome', 'Cadastro');
+      return false;
+    }
+
+    if(user.lastname === ''){
+      window.toastr.error('Digite seu SobreNome', 'Cadastro');
+      return false;
+    }
+
+    return true;
+  }
+
   /* registra os dados na base */
   $scope.register = function(){
     
-    var user = $scope.user;
+    $scope.submited = true;
 
-    /* verifica o cep */
-    if(user.latitude === '' || user.longitude === ''){
-      window.toastr.error('Digite novamente o seu CEP', 'Cadastro');
-      return false;
-    }
+    if($scope.validate()){
 
-    /* verifica o telefone */
-    var validadePhone = true;
-    for (var i = user.telefones.length - 1; i >= 0; i--) {
-      var phone = user.telefones[i];
-      if(phone.operadora === '' || phone.telefone === ''){
-        validadePhone = false;
+      var user = $scope.user;
+
+      /* verifica o cep */
+      if(user.latitude === '' || user.longitude === ''){
+        window.toastr.error('Digite novamente o seu CEP', 'Cadastro');
+        return false;
       }
-    }
 
-    if(!validadePhone){
-      window.toastr.error('Selecione a operadora e telefone', 'Cadastro');
-      return false;
-    }
+      /* verifica o telefone */
+      var validadePhone = true;
+      for (var i = user.telefones.length - 1; i >= 0; i--) {
+        var phone = user.telefones[i];
+        if(phone.operadora === '' || phone.telefone === ''){
+          validadePhone = false;
+        }
+      }
 
-    if(user.tipo === 'COLABORADOR' && user.servicos.length === 0){
-      window.toastr.error('Selecione ao menos uma função', 'Cadastro');
-      return false;
-    }
+      if(!validadePhone){
+        window.toastr.error('Selecione a operadora e telefone', 'Cadastro');
+        return false;
+      }
 
-    UserService.save(user, function(data){
-      $scope.success = data;
-      window.toastr.success('Conta criada com sucesso', 'Cadastro');
-    });
+      if(user.tipo === 'COLABORADOR' && user.servicos.length === 0){
+        window.toastr.error('Selecione ao menos uma função', 'Cadastro');
+        return false;
+      }
+
+      UserService.save(user, function(data){
+        $scope.success = data;
+        window.toastr.success('Conta criada com sucesso', 'Cadastro');
+      });
+    }
   };
 
   $scope.user.tipo = 'BAGUNCEIRO';
@@ -178,6 +202,8 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
   /* formata os dados */
   $scope.showAddress = function(resp){
 
+    console.log(resp);
+
     var location = {
       numero : 'street_number',
       cidade : 'locality',
@@ -207,8 +233,10 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
 
     var geolocation = resp.geometry.location;
 
-    $scope.user.latitude = geolocation.A;
-    $scope.user.longitude = geolocation.F;
+    $scope.user.latitude = geolocation.A || geolocation.G;
+    $scope.user.longitude = geolocation.F || geolocation.K;
+
+    $scope.user.endereco = resp.formatted_address;
 
     for (var i = 0; i < addressListLen; i++) {
 
@@ -234,7 +262,12 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
             }
             if (typeAdress === location.zip) {
                 //$scope.user.cep = $filter('cep')(address.short_name);
-                $scope.user.cep = address.short_name.replace(/\D/g, '');
+                if(address.short_name != ''){
+                  if(address.short_name.length > 5){
+                    console.log(address.short_name.length);
+                    $scope.user.cep = address.short_name.replace(/\D/g, '');                    
+                  }
+                }
             }
             if (typeAdress === location.bairro) {
                 $scope.user.bairro = address.short_name;

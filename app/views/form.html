@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <form accept-charset="utf-8" class="form go-right" role="form" name="formbagunceiro" id="formbagunceiro">
+        <form accept-charset="utf-8" class="form go-right" role="form" name="formbagunceiro" id="formbagunceiro" novalidate>
 
             <input type="hidden" ng-value="user.idfacebook" name="idfacebook" ng-model="user.idfacebook" />
 
@@ -13,13 +13,13 @@
             <!-- nome # sobrenome -->
             <div class="row">
                 <div class="col-xs-6 col-md-6 col-xs-12">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{true : 'has-error'}[(formbagunceiro.firstname.$error.required && formbagunceiro.firstname.$dirty) || (submited && formbagunceiro.firstname.$error.required)]">
                         <input type="text" name="firstname" value="" class="form-control input-lg" placeholder="Nome" ng-model="user.firstname" required />
                         <label for="name" class="lbl-focus">Nome</label>
                     </div>
                 </div>
                 <div class="col-xs-6 col-md-6 col-xs-12">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{true : 'has-error'}[(formbagunceiro.lastname.$error.required && formbagunceiro.lastname.$dirty) || (submited && formbagunceiro.lastname.$error.required)]">
                         <input type="text" name="lastname" value="" class="form-control input-lg" placeholder="SobreNome" ng-model="user.lastname" required />
                         <label for="name" class="lbl-focus">SobreNome</label>
                     </div>
@@ -29,7 +29,7 @@
             <!-- email -->
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{true : 'has-error'}[(formbagunceiro.email.$error.required && formbagunceiro.email.$dirty) || (submited && formbagunceiro.email.$error.required)]">
                         <input type="email" name="email" value="" class="form-control input-lg" placeholder="E-mail" ng-model="user.email" required />
                         <label for="name" class="lbl-focus">E-mail</label>
                     </div>
@@ -39,13 +39,13 @@
             <!-- senhas -->
             <div class="row">
                 <div class="col-xs-6 col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{true : 'has-error'}[(formbagunceiro.senha.$error.required && formbagunceiro.senha.$dirty) || (submited && formbagunceiro.senha.$error.required)]">
                         <input type="password" name="senha" value="" class="form-control input-lg" ng-model="user.senha" placeholder="Senha" required />
                         <label for="name" class="lbl-focus">Senha</label>
                     </div>
                 </div>
                 <div class="col-xs-6 col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{true : 'has-error'}[(formbagunceiro.confirmsenha.$error.required && formbagunceiro.confirmsenha.$dirty) || (submited && formbagunceiro.confirmsenha.$error.required)]">
                         <input type="password" name="confirmsenha" value="" class="form-control input-lg" ng-model="user.confirmsenha" placeholder="Confirme a senha" required  />
                         <label for="name" class="lbl-focus">Confirme a senha</label>
                     </div>
@@ -56,20 +56,20 @@
             <strong>Data de Nascimento:</strong>
             <div class="row">
                 <div class="col-xs-4 col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{true : 'has-error'}[(formbagunceiro.dia.$error.required && formbagunceiro.dia.$dirty) || (submited && formbagunceiro.dia.$error.required)]">
                         <input type="number" name="dia" value="" required min="1" max="31" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxlength="2" class="form-control input-lg" ng-model="user.dia" placeholder="dd" />
                         <label for="name" class="lbl-focus">Dia</label>
                     </div>
                 </div>
                 <div class="col-xs-4 col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{true : 'has-error'}[(formbagunceiro.mes.$error.required && formbagunceiro.mes.$dirty) || (submited && formbagunceiro.mes.$error.required)]">
                         <input type="number" name="mes" value="" required min="1" max="12" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxlength="2" class="form-control input-lg" ng-model="user.mes" placeholder="mm" />
                         <label for="name" class="lbl-focus">Mês</label>
                     </div>
                 </div>
                 <div class="col-xs-4 col-md-4">
-                    <div class="form-group">
-                        <input type="number" name="ano" value="" required min="1900" maxlength="4" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="form-control input-lg" ng-model="user.ano" placeholder="aaaa" />
+                    <div class="form-group" ng-class="{true : 'has-error'}[(formbagunceiro.ano.$error.required && formbagunceiro.ano.$dirty) || (submited && formbagunceiro.ano.$error.required)]">
+                        <input type="number" name="ano" value="" required min="1900" ng-maxlength="4" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxlength="4" class="form-control input-lg" ng-model="user.ano" placeholder="aaaa" />
                         <label for="name" class="lbl-focus">Ano</label>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                     <fieldset>
                         <!-- cep # endereco # numero  -->
                         <div class="col-sm-3">
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{true : 'has-error'}[formbagunceiro.cep.$error.required && formbagunceiro.cep.$dirty]">
                                 <div class="input-group input-group-lg">
                                     <input type="text" ng-blur="getCepbyGoogle(user.cep)" placeholder="18800-000" name="cep" ng-model="user.cep" maxlength="9" class="form-control" ui-br-cep-mask/>
                                     <span class="input-group-btn">
@@ -180,13 +180,13 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <input type="text" placeholder="Cidade" ng-model="user.cidade" name="cidade" class="form-control input-lg"required>
+                                <input type="text" placeholder="Cidade" ng-model="user.cidade" name="cidade" class="form-control input-lg" required/>
                                 <label for="name" class="lbl-focus">Cidade</label>
                             </div>
                         </div>
                         <div class="col-sm-5">
                             <div class="form-group">
-                                <input type="text" placeholder="Bairro" ng-model="user.bairro" name="bairro" class="form-control input-lg" required>
+                                <input type="text" placeholder="Bairro" ng-model="user.bairro" name="bairro" class="form-control input-lg" required/>
                                 <label for="name" class="lbl-focus">Bairro</label>
                             </div>
                         </div>
@@ -203,7 +203,7 @@
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-credit-card"></span>
                                         </span>
-                                        <input type="number" class="form-control input-sm" placeholder="120" name="valor" ng-model="user.valor"/>
+                                        <input type="number" class="form-control input-sm" placeholder="120" name="valor" ng-model="user.valor" required/>
                                         <span class="input-group-addon input-sm">R$</span>
                                     </div>
                                 </div>
@@ -244,7 +244,7 @@
 
 
 
-                <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" ng-hide="success != ''" ng-disabled="formbagunceiro.$invalid" ng-click="register()">Criar minha conta</button>
+                <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" ng-hide="success != ''" ng-click="register()">Criar minha conta</button>
             </div>
         </form>          
     </div>
