@@ -21,7 +21,7 @@ angular.module('angularApp')
     /* faz a pesquisa baseada no cep ou na geolocation do usuário */
     $scope.findMarker = function(cep){
 
-      var callback = $scope.showAddress;
+      var callback = $scope.showMarker;
 
       if(cep){
         UserService.getCepbyGoogle(cep, function(resp){
@@ -35,7 +35,7 @@ angular.module('angularApp')
     };
 
     /* printa o resultado e chama a pesquisa */
-    $scope.showAddress = function(resp){
+    $scope.showMarker = function(resp){
 
       var geolocation = resp.geometry.location;
 
@@ -46,13 +46,16 @@ angular.module('angularApp')
 
       $scope.$apply();
 
-      $scope.search();
+      $scope.find();
     };
 
-    $scope.search = function(){
+    /* Pesquisa os colaboradored */
+    $scope.find = function(){
       $http.get(apiUrl + 'api/index.php/pesquisar/colaboradores', { params : { data : $scope.filters }}).then(function(data){
         $scope.data = data.data;
       });
     };
+
+    $scope.findMarker();
 
   });
