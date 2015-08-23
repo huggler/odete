@@ -1,6 +1,6 @@
-<div class="jumbotron">
+﻿<div class="jumbotron">
   <div class="container text-center">
-      <h1><i class="icon-odete main"></i></br>odete</h1>
+      <h1><i class="icon-odete main"></i>odete</h1>
       <p class="lead">
         solução dos bagunceiros!
       </p>
@@ -8,20 +8,19 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <a class="btn btn-info btn-lg btn-block" role="button" href="/cadastro/odete" data-toggle="tooltip" data-placement="top" title="Exclusivo para profissionais que realizam serviço de limpeza">Quer trabalhar ? Clique para se cadastrar »</a>
+            <div class="col-md-6">
+                <div class="form-group text-center">
+                <h3 for="cep">Quer trabalhar?</h3>
+                <small class="btn-block">preencha seus dados no formulário</small>
+                    <a class="btn btn-info btn-lg" role="button" href="/cadastro/odete" data-toggle="tooltip" data-placement="top" title="Exclusivo para profissionais que realizam serviço de limpeza">Clique para se cadastrar »</a>
                 </div>
             </div>
-        </div>
-    
-        <!-- cep -->
-        <div class="row">
-          <div class="col-lg-4 col-lg-offset-4">
+
+          <div class="col-md-6 border-left">
             <div class="form-group text-center">
                 <h3 for="cep">Quer contratar?</h3>
                 <small>digite seu cep para buscar em sua região...</small>
-                <div class="input-group input-group-lg">
+                <div class="input-group input-group-lg col-md-6 col-md-offset-3">
                     <input class="form-control input-lg" id="cep" ng-blur="findMarker(user.cep)" type="text" maxlength="9" ng-model="user.cep" placeholder="Ex: 18800-000" ui-br-cep-mask/>
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button" ng-click="findMarker(user.cep);"><i class="glyphicon glyphicon-search"></i></button>
@@ -29,10 +28,14 @@
                 </div>
             </div><!-- /.col-lg-6 -->
           </div>
+
+
         </div>
+    
+        <!-- cep -->
         <div class="row">
             <div class="col-md-12 text-center">
-                <span>{{endereco}}</span>
+                <span class="app-address">{{endereco}}</span>
             </div>
         </div>
     </div>       

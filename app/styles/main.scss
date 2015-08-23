@@ -102,6 +102,13 @@ font-size: 2em;
 }
 }
 
+@media screen and (min-width: 990px) {
+
+.border-left {border-left:1px solid #ccc}
+
+}
+.app-address {margin-top: 20px; display: block}
+.jumbotron {padding-bottom: 30px !important;}
 
 .fb_iframe_widget {display: block !important;}
 .fb_iframe_widget span {display: block !important; width: 100% !important}
