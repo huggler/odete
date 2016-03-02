@@ -12,18 +12,18 @@
                 <div class="form-group text-center">
                 <h3 for="cep">Quer trabalhar?</h3>
                 <small class="btn-block">preencha seus dados no formulário</small>
-                    <a class="btn btn-info btn-lg" role="button" href="/cadastro/odete" data-toggle="tooltip" data-placement="top" title="Exclusivo para profissionais que realizam serviço de limpeza">Clique para se cadastrar »</a>
+                    <a class="btn btn-info btn-lg" role="button" href="/cadastro/odete" data-toggle="tooltip" data-placement="top" title="Exclusivo para profissionais que realizam serviço de limpeza">Quero trabalhar »</a>
                 </div>
             </div>
 
           <div class="col-md-6 border-left">
             <div class="form-group text-center">
                 <h3 for="cep">Quer contratar?</h3>
-                <small>digite seu cep para buscar em sua região...</small>
+                <small>digite o cep de sua região...</small>
                 <div class="input-group input-group-lg col-md-6 col-md-offset-3">
                     <input class="form-control input-lg" id="cep" ng-blur="findMarker(user.cep)" type="text" maxlength="9" ng-model="user.cep" placeholder="Ex: 18800-000" ui-br-cep-mask/>
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="findMarker(user.cep);"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-default" type="button" title="Pesquisar na minha região" ng-click="findMarker(user.cep);"><i class="glyphicon glyphicon-search"></i></button>
                     </span>
                 </div>
             </div><!-- /.col-lg-6 -->

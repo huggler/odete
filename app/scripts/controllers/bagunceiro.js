@@ -233,8 +233,8 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
 
     var geolocation = resp.geometry.location;
 
-    $scope.user.latitude = geolocation.A || geolocation.G;
-    $scope.user.longitude = geolocation.F || geolocation.K;
+    $scope.user.latitude = geolocation.lat();
+    $scope.user.longitude = geolocation.lng();
 
     $scope.user.endereco = resp.formatted_address;
 
@@ -269,7 +269,7 @@ app.controller('BagunceiroCtrl', ['$scope', 'UserService','$location', function 
                   }
                 }
             }
-            if (typeAdress === location.bairro) {
+            if (typeAdress === location.bairro  || typeAdress === 'sublocality') {
                 $scope.user.bairro = address.short_name;
             }
             if (typeAdress === location.pais) {

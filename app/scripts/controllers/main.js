@@ -16,7 +16,7 @@ angular.module('angularApp')
     $scope.filters.latitude = '';
     $scope.filters.longitude = '';
 
-    var apiUrl = 'http://odete.me/';
+    var urlApi = UserService.urlApi;
 
     /* faz a pesquisa baseada no cep ou na geolocation do usuário */
     $scope.findMarker = function(cep){
@@ -39,8 +39,8 @@ angular.module('angularApp')
 
       var geolocation = resp.geometry.location;
 
-      $scope.filters.latitude = geolocation.A || geolocation.G;
-      $scope.filters.longitude = geolocation.F || geolocation.K;
+      $scope.filters.latitude = geolocation.lat();
+      $scope.filters.longitude = geolocation.lng();
 
       $scope.endereco = resp.formatted_address;
 
@@ -51,7 +51,7 @@ angular.module('angularApp')
 
     /* Pesquisa os colaboradored */
     $scope.find = function(){
-      $http.get(apiUrl + 'api/index.php/pesquisar/colaboradores', { params : { data : $scope.filters }}).then(function(data){
+      $http.get(urlApi + '/api/index.php/pesquisar/colaboradores', { params : { data : $scope.filters }}).then(function(data){
         $scope.data = data.data;
       });
     };

@@ -39,16 +39,16 @@ app.service('UserService', ['$http', function($http){
     servicos:[]
   };
 
-  var urlApi = 'http://odete.me';
+  this.urlApi = 'http://odete.hagility.com.br';
 
   this.getServicos = function(callback){
-    $http.get(urlApi + '/api/index.php/pesquisar/servicos').then(function(response){
+    $http.get(this.urlApi + '/api/index.php/pesquisar/servicos').then(function(response){
       callback(response.data);
     });
   };
 
   this.getOperadoras = function(callback){
-    $http.get(urlApi + '/api/index.php/pesquisar/operadoras').then(function(response){
+    $http.get(this.urlApi + '/api/index.php/pesquisar/operadoras').then(function(response){
       callback(response.data);
     });
   };
@@ -78,7 +78,7 @@ app.service('UserService', ['$http', function($http){
 
   this.save = function(data, callback){
       
-    $http.post(urlApi + '/api/index.php/bagunceiro/cadastrar', data).success(function(data){
+    $http.post(this.urlApi + '/api/index.php/bagunceiro/cadastrar', data).success(function(data){
         callback(data);
     }).error(function(){
       window.toastr.error('Erro ao cadastrar. Tente novamente');
@@ -145,5 +145,7 @@ app.service('UserService', ['$http', function($http){
       break;
     }
   };
+
+  return this;
 
 }]);
